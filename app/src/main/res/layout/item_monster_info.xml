@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:contentDescription="тут изображение"
+            android:id="@+id/monsterPic"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:paddingStart="@dimen/text_padding"
+                android:paddingEnd="@dimen/text_padding"
+                android:id="@+id/descTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+        <Button
+            android:id="@+id/okBtn"
+            android:layout_margin="@dimen/default_margin"
+            android:text="@string/ok"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/btn_size_h"
+            android:layout_height="@dimen/btn_size_v"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Секреты Магунят</string>
     <string name="start_game">Начать</string>
+    <string name="meet">Знакомтесь:</string>
+    <string name="ok">ОК</string>
+    <string name="next">Далее</string>
 </resources>
