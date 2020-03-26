@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="8dp"
     tools:context=".MeetActivity">
 
     <TextView
+        android:layout_margin="@dimen/default_margin"
         android:text="@string/meet"
         android:layout_gravity="start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+
     <androidx.viewpager.widget.ViewPager
+
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:clipToPadding="false"
@@ -21,12 +23,13 @@
         android:layout_weight="1"
         android:layout_height="0dp"
         android:paddingEnd="@dimen/card_padding"
-        android:paddingLeft="@dimen/card_padding"
-        android:paddingRight="@dimen/card_padding"
+        android:paddingTop="@dimen/card_padding"
+        android:paddingBottom="@dimen/card_padding"
         android:paddingStart="@dimen/card_padding"
         />
 
     <Button
+        android:id="@+id/nextBtn"
         android:enabled="false"
         android:onClick="onNextBtnClick"
         android:layout_gravity="end"
