@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<QuestItem> questItems = new ArrayList<>();
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 01", "Пройдено"));
+        questItems.add(new QuestItem(R.drawable.kiski, "Квест 001", "Пройдено"));
         questItems.add(new QuestItem(R.drawable.kiski, "Квест 2", "Пройдено"));
         questItems.add(new QuestItem(R.drawable.kiski, "Квест 3", "Текущий"));
         for (int i = 4; i < 11; i++)  {
