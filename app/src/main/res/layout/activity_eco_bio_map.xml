@@ -11,7 +11,7 @@
         android:id="@+id/myZoomageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ecobiopathmap"
+        android:src="@drawable/artifact_ecobiopathmap"
         android:translationZ="3dp"
         app:zoomage_restrictBounds="false"
         app:zoomage_animateOnReset="true"
