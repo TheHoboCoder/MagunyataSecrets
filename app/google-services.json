@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "972735898692",
+    "firebase_url": "https://magunyatasecrets.firebaseio.com",
+    "project_id": "magunyatasecrets",
+    "storage_bucket": "magunyatasecrets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972735898692:android:39c07492a0bd105714c811",
+        "android_client_info": {
+          "package_name": "ru.edu.masu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972735898692-skuj6t1jlsijdvr0qhfelrh8le31lg0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.edu.masu",
+            "certificate_hash": "397237fae04636b7d9319e23a539bf1372137685"
+          }
+        },
+        {
+          "client_id": "972735898692-a9ifto1i4a98csjcup9g71hb592ta12c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3AddCp9rhJn8OjcQBiWS51hFNGnP0E7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972735898692-a9ifto1i4a98csjcup9g71hb592ta12c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
