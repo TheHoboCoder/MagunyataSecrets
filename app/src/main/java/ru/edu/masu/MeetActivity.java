@@ -51,7 +51,7 @@ public class MeetActivity extends AppCompatActivity implements MonsterInfoFragme
     }
 
     public void onNextBtnClick(View view) {
-        Intent intent = new Intent(MeetActivity.this,MainActivity.class);
+        Intent intent = new Intent(MeetActivity.this,InventoryExplorerActivity.class);
         startActivity(intent);
     }
 }

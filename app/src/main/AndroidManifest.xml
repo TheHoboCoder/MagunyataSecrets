@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ru.edu.masu">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="barcode" />
+
         <activity android:name=".utils.ScanActivity"
               android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity"/>
         <!--Meet Activity won't be added to back stack,
         user will navigate back from MainActivity to StartActivity-->
         <activity android:name=".MeetActivity" android:noHistory="true"/>
-
+        <activity android:name=".InventoryExplorerActivity"></activity>
+        <activity android:name=".EcoBioMapActivity" />
         <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,11 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <meta-data
-            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="barcode" />
-    </application>
 
-    <uses-permission android:name="android.permission.CAMERA" />
+    </application>
 
 </manifest>
