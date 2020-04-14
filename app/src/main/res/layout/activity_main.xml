@@ -14,6 +14,7 @@
         android:layout_height="@dimen/main_toolbar_h">
 
         <ImageButton
+            android:contentDescription="@string/equipment"
             android:id="@+id/inventoryButton"
             android:layout_width="@dimen/main_toolbar_h"
             android:layout_height="match_parent"
@@ -23,6 +24,7 @@
 
         <ImageButton
             android:id="@+id/hintBtn"
+            android:contentDescription="@string/hint"
             android:src="@drawable/kiski"
             android:scaleType="centerInside"
             android:layout_width="@dimen/main_toolbar_h"
@@ -32,6 +34,7 @@
 
         <ImageButton
             android:id="@+id/storyBtn"
+            android:contentDescription="@string/story"
             android:layout_width="@dimen/main_toolbar_h"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +61,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/image"
                 android:src="@drawable/kiski"
