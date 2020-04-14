@@ -7,73 +7,99 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="@dimen/main_toolbar_h">
+
+        <ImageButton
+            android:id="@+id/inventoryButton"
+            android:layout_width="@dimen/main_toolbar_h"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/hintBtn"
+            android:src="@drawable/kiski"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/main_toolbar_h"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/storyBtn"
+            android:layout_width="@dimen/main_toolbar_h"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/hintBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <!--TODO: remove click listener-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         app:cardCornerRadius="8dp"
-        android:layout_marginTop="110dp"
+        app:cardElevation="8dp"
         android:onClick="testCamera"
-        android:layout_height="183dp">
-        <LinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:background="@drawable/bg1"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="57dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/kiski"
-                    android:contentDescription="@string/image" />
-                <LinearLayout
-                    android:layout_width="267dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_marginTop="14dp"
-                        android:layout_width="177dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="25dp"
-                        android:text="@string/quest"
-                        android:textAlignment="viewStart"
-                        android:textAllCaps="false"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/kiski"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/questName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/quest"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.37"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:layout_constraintVertical_bias="0.37" />
+
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="9dp"
-                android:layout_marginEnd="6dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/questPassBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="78dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="30dp"
-                >
                 <TextView
+                    android:id="@+id/questDesc"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-
+                    android:layout_height="wrap_content"
                     android:fontFamily="cursive"
                     android:text="@string/find"
                     android:textAlignment="center"
@@ -81,8 +107,24 @@
                     android:textSize="18sp"
                     android:textStyle="italic"
                     android:typeface="normal" />
-            </LinearLayout>
-        </LinearLayout>
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/questPassBtn"
+                android:text="@string/pass_quest"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
@@ -91,8 +133,9 @@
         android:layout_marginTop="15dp"
         >
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginTop="7dp"
             android:text="@string/progress"
             android:textAlignment="center"
@@ -101,7 +144,8 @@
         <ProgressBar
             android:id="@+id/progressBar2"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="168dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:foregroundTint="#FFFFFF"
             android:max="100"
@@ -112,7 +156,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="2">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
