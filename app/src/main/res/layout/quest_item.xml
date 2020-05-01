@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
+    android:elevation="4dp"
     android:layout_gravity="center_horizontal"
     android:layout_margin="9dp"
     >
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bg2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg2">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_marginTop="7dp"
-            android:layout_width="66dp"
-            android:layout_height="47dp">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="66dp"
-                android:layout_height="match_parent"
-                />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Номер квеста"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="serif-monospace"
+            android:text="Статус"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="Номер квеста"
-                android:layout_marginStart="20dp"
-                android:textSize="19sp"
-                android:textStyle="bold">
-
-            </TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:layout_marginTop="27dp"
-                android:fontFamily="serif-monospace"
-                android:text="Статус"
-                android:layout_marginStart="35dp"
-                android:textSize="15sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
 </androidx.cardview.widget.CardView>
