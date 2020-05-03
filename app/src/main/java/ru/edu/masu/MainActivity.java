@@ -2,7 +2,9 @@ package ru.edu.masu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,9 +21,11 @@ import ru.edu.masu.data.QuestItem;
 import ru.edu.masu.utils.ScanActivity;
 
 public class MainActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private CountDownTimer timer;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<QuestItem> questItems = new ArrayList<>();
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 0001", "Пройдено"));
+        questItems.add(new QuestItem(R.drawable.kiski, "Квест 1", "Пройдено"));
         questItems.add(new QuestItem(R.drawable.kiski, "Квест 2", "Пройдено"));
         questItems.add(new QuestItem(R.drawable.kiski, "Квест 3", "Текущий"));
         for (int i = 4; i < 11; i++)  {
@@ -42,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+        //NOTE: recreate unhandled
+        timer = new CountDownTimer(2000,2000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+            }
+
+            @Override
+            public void onFinish() {
+                HintFragment fr = HintFragment.newInstance(R.drawable.sociofob,"Описание");
+                fr.setCancelable(false);
+                fr.show(getSupportFragmentManager(),"hint");
+            }
+        };
+        timer.start();
     }
 
     @Override
@@ -81,5 +100,16 @@ public class MainActivity extends AppCompatActivity {
     public void testCamera(View view) {
         Intent intent = new Intent(MainActivity.this, ScanActivity.class);
         startActivityForResult(intent,ScanActivity.REQUEST_SCAN_ACTIVITY);
+    }
+
+    public void inventoryClick(View view) {
+        Intent intent = new Intent(MainActivity.this, InventoryExplorerActivity.class);
+        startActivity(intent);
+    }
+
+    public void showDescription(View view) {
+        Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
+        intent.putExtra("DESC","HELLO_THERE");
+        startActivity(intent);
     }
 }

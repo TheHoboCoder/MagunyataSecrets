@@ -11,7 +11,7 @@
     <string name="pass_quest">Сдать квест</string>
     <string name="find">Найдите Х, текст задания</string>
     <string name="line">___________________________________________________________________________________________</string>
-    <string name="progress">Вы прошли 2/10</string>
+    <string name="progress">Вы прошли 0/10</string>
     <string name="image">КиИКИиИКИИИИИсКИ</string>
 
     <string name="failure">Что-то пошло не так :(</string>

@@ -25,11 +25,11 @@ public class MeetActivity extends AppCompatActivity implements MonsterInfoFragme
         setContentView(R.layout.activity_meet);
         //TODO: вставить реальные данные
         monsters = new ArrayList<>();
-        monsters.add(new Monster(R.drawable.empty,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.empty,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.empty,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.empty,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.empty,getString(R.string.placeholder)));
+        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
+        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
+        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
+        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
+        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
 
 
         ViewPager pager = findViewById(R.id.pager);

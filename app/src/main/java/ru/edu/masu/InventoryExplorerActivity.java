@@ -73,9 +73,14 @@ public class InventoryExplorerActivity extends AppCompatActivity {
                         titleTextView.setText(artifactNames.get(position));
                         imageView.setImageResource(id);
                         textView.setText(artifactTexts.get(position));
-                        if (position == artifactImages.size() - 1)
-                            rightButton.setBackgroundResource(R.drawable.inventory_button_left_right_off);
+//                        if (position == artifactImages.size() - 1)
+//                            rightButton.setBackgroundResource(R.drawable.inventory_button_left_right_off);
                         if (position == 1) leftButton.setBackgroundResource(R.drawable.inventory_button_left);
+                    }
+                    else{
+                        Intent intent = new Intent(InventoryExplorerActivity.this,DescriptionActivity.class);
+                        intent.putExtra("DESC","HELLO THERE");
+                        startActivity(intent);
                     }
                 }
         });

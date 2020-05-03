@@ -17,6 +17,7 @@
             android:contentDescription="@string/equipment"
             android:id="@+id/inventoryButton"
             android:layout_width="@dimen/main_toolbar_h"
+            android:onClick="inventoryClick"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +49,7 @@
         android:layout_marginLeft="15dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        android:onClick="testCamera"
+        android:onClick="showDescription"
         android:layout_height="0dp"
         android:layout_weight="2">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -152,7 +153,7 @@
             android:layout_height="40dp"
             android:foregroundTint="#FFFFFF"
             android:max="100"
-            android:progress="20"
+            android:progress="0"
             android:progressTint="#673AB7" />
     </LinearLayout>
 
