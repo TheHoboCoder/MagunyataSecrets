@@ -6,4 +6,12 @@
 
     <color name="viewfinderStroke">#C36F08</color>
     <color name="viewfinderFill">#46D9DBEC</color>
+
+    <color name="dark_blue">#253A4B</color>
+    <color name="pink">#F23B5F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="fuxy">#F45EAA</color>
+    <color name="violet">#5656A5</color>
 </resources>

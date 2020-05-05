@@ -47,20 +47,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-        //NOTE: recreate unhandled
-        timer = new CountDownTimer(2000,2000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-            }
+        if(savedInstanceState==null){
+            timer = new CountDownTimer(2000,2000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
 
-            @Override
-            public void onFinish() {
-                HintFragment fr = HintFragment.newInstance(R.drawable.sociofob,"Описание");
-                fr.setCancelable(false);
-                fr.show(getSupportFragmentManager(),"hint");
-            }
-        };
-        timer.start();
+                @Override
+                public void onFinish() {
+                    HintFragment fr = HintFragment.newInstance(R.drawable.sociofob,"Описание");
+                    fr.setCancelable(false);
+                    fr.show(getSupportFragmentManager(),"hint");
+                }
+            };
+            timer.start();
+        }
+
     }
 
     @Override
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
                        dialog.dismiss();
-
                    }
                 })
                 .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {

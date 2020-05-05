@@ -1,36 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/default_margin">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:background="@drawable/items">
+
         <ImageView
-            android:contentDescription="тут изображение"
             android:id="@+id/monsterPic"
+            android:src="@drawable/sociofob"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:scaleType="centerInside"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="Monter" />
+
+        <TextView
+            android:id="@+id/textView5"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"/>
+            android:layout_height="85dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/marmelad"
+            android:text="Социофоб"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="20dp"
             android:layout_weight="4">
+
             <TextView
-                android:paddingStart="@dimen/text_padding"
-                android:paddingEnd="@dimen/text_padding"
                 android:id="@+id/descTxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/marmelad"
+                android:paddingStart="@dimen/text_padding"
+                android:paddingEnd="@dimen/text_padding"
+                android:text="Описание ..."
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_gravity="top"/>
+
         </ScrollView>
-        <Button
-            android:id="@+id/okBtn"
-            android:layout_margin="@dimen/default_margin"
-            android:text="@string/ok"
-            android:layout_gravity="center"
-            android:layout_width="@dimen/btn_size_h"
-            android:layout_height="wrap_content" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <Button
+                android:id="@+id/okBtn"
+                android:layout_width="@dimen/btn_size_h"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ok_bth"
+                android:fontFamily="@font/marmelad"
+                android:text="OK"
+                android:textSize="36sp" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

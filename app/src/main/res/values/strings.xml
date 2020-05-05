@@ -9,6 +9,9 @@
 
     <string name="quest">Текущий квест</string>
     <string name="pass_quest">Сдать квест</string>
+    <string name="equipment">Инвентарь</string>
+    <string name="hint">Подсказка</string>
+    <string name="story">Посмотреть историю</string>
     <string name="find">Найдите Х, текст задания</string>
     <string name="line">___________________________________________________________________________________________</string>
     <string name="progress">Вы прошли 0/10</string>
@@ -16,10 +19,6 @@
 
     <string name="failure">Что-то пошло не так :(</string>
     <string name="quitGame">Вы действительно хотите завершить игру?</string>
-
-    <string name="equipment">Инвентарь</string>
-    <string name="hint">Подсказка</string>
-    <string name="story">Посмотреть историю</string>
 
     <string name="artifact_masuvk_title">Официальная группа ВКонтакте</string>
     <string name="artifact_masuvk_text">Нажмите на изображение, чтобы перейти ... текст текст текст текст текст текст текст текст текст текст  текст текст текст текст текст  текст текст текст текст текст .</string>
