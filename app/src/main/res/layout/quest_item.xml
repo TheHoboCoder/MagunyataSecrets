@@ -9,8 +9,9 @@
     android:layout_gravity="center_horizontal"
     android:layout_margin="9dp"
     >
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/questContainer"
+        android:id="@+id/quest_item_layout"
         android:background="@drawable/bg2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
         public ImageView image;
         public TextView name;
         public TextView status;
+        public ConstraintLayout quest_item_layout;
 
         public QuestViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -37,6 +39,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
             image  = itemView.findViewById(R.id.image);
             name   = itemView.findViewById(R.id.name);
             status = itemView.findViewById(R.id.status);
+            quest_item_layout = itemView.findViewById(R.id.quest_item_layout);
         }
 
         @Override
@@ -56,6 +59,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
     @Override
     public void onBindViewHolder(@NonNull QuestViewHolder holder, int position) {
         QuestItem questItem = arrayList.get(position);
+        holder.quest_item_layout.setBackgroundResource(questItem.getBackground());
         holder.image.setImageResource(questItem.getImage());
         holder.name.setText(questItem.getName());
         holder.status.setText(questItem.getStatus());

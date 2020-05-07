@@ -33,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<QuestItem> questItems = new ArrayList<>();
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 1", QuestItem.QuestStatus.ACTIVE));
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 2"));
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 3"));
-        for (int i = 4; i < 11; i++)  {
-            questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i));
+        questItems.add(new QuestItem(R.drawable.kiski, "Квест 1", "Текущий",R.drawable.bg2));
+
+        for (int i = 2; i < 11; i++)  {
+            questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i, "Недоступно",R.drawable.bg3));
         }
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
