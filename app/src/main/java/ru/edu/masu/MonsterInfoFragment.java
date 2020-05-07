@@ -24,10 +24,11 @@ public class MonsterInfoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MONSTER_PIC = "monster_pic";
     private static final String MONSTER_DESC = "monster_desc";
+    private static final String MONSTER_NAME = "monster_name";
 
     //picId - id ресурса drawable изображения
     private int picId;
-    private String monsterDesc;
+    private String monsterDesc, monsterName;
 
     @Nullable
     public CardView getCardView() {
@@ -63,11 +64,12 @@ public class MonsterInfoFragment extends Fragment {
      * @return A new instance of fragment MonsterInfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MonsterInfoFragment newInstance(int picId, String desc) {
+    public static MonsterInfoFragment newInstance(int picId, String name, String desc) {
         MonsterInfoFragment fragment = new MonsterInfoFragment();
         Bundle args = new Bundle();
         args.putInt(MONSTER_PIC, picId);
         args.putString(MONSTER_DESC, desc);
+        args.putString(MONSTER_NAME, name);
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,6 +80,7 @@ public class MonsterInfoFragment extends Fragment {
         if (getArguments() != null) {
             picId = getArguments().getInt(MONSTER_PIC);
             monsterDesc = getArguments().getString(MONSTER_DESC);
+            monsterName = getArguments().getString(MONSTER_NAME);
         }
     }
 
@@ -86,6 +89,8 @@ public class MonsterInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_monster_info,container, false);
         ImageView monsterPic = view.findViewById(R.id.monsterPic);
+        TextView monsterNameTxt = view.findViewById(R.id.monsterName);
+        monsterNameTxt.setText(monsterName);
         TextView monsterDescTxt = view.findViewById(R.id.descTxt);
         monsterPic.setImageDrawable(getResources().getDrawable(picId));
         monsterDescTxt.setText(monsterDesc);

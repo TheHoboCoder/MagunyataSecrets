@@ -39,7 +39,7 @@ public class MonsterInfoPagerAdapter extends FragmentPagerAdapter {
         this.baseElevation =  baseElevation;
         fragments = new ArrayList<>(monsters.size());
         for(Monster monster: monsters){
-            MonsterInfoFragment fragment = MonsterInfoFragment.newInstance(monster.picId, monster.monsterDesc);
+            MonsterInfoFragment fragment = MonsterInfoFragment.newInstance(monster.picId, monster.monsterName, monster.monsterDesc);
             fragment.setReadListener(readCallback);
             fragments.add(fragment);
         }

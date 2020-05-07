@@ -14,8 +14,8 @@ public class DescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
         String desc = getIntent().getStringExtra("DESC");
-        TextView v = findViewById(R.id.descTxt);
-        v.setText(desc);
+//        TextView v = findViewById(R.id.descTxt);
+//        v.setText(desc);
     }
 
     public void onOkBtnClick(View view) {

@@ -23,15 +23,14 @@ public class MeetActivity extends AppCompatActivity implements MonsterInfoFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meet);
-        //TODO: вставить реальные данные
         monsters = new ArrayList<>();
-        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
-        monsters.add(new Monster(R.drawable.sociofob,getString(R.string.placeholder)));
-
-
+        monsters.add(new Monster(R.drawable.strazhnik,"Стражник", getString(R.string.quard_desc)));
+        monsters.add(new Monster(R.drawable.sessia_sketch,"Сессия",getString(R.string.session_desc)));
+        monsters.add(new Monster(R.drawable.logistic,"Логистик", getString(R.string.logistic_desc)));
+        monsters.add(new Monster(R.drawable.neryakha_sketch,"Неряха",getString(R.string.neryaha_desc)));
+        monsters.add(new Monster(R.drawable.sociofob,"Социофоб",getString(R.string.sociofob_desc)));
+        monsters.add(new Monster(R.drawable.golodny_sketch,"Голодный",getString(R.string.hungry_desc)));
+        monsters.add(new Monster(R.drawable.byurokrat_sketch,"Бюрократ",getString(R.string.burea_desc)));
         ViewPager pager = findViewById(R.id.pager);
         MonsterInfoPagerAdapter adapter =  new MonsterInfoPagerAdapter(getSupportFragmentManager(),
                                                     monsters,8, this);

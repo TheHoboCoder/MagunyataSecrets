@@ -19,16 +19,15 @@ import java.util.Collections;
 
 public class InventoryExplorerActivity extends AppCompatActivity {
 
-    private ArrayList<String> artifactNames;
+    //private ArrayList<String> artifactNames;
     private ArrayList<Integer> artifactImages;
-    private ArrayList<String> artifactTexts;
+    private ArrayList<Integer> artifactTexts;
 
     private Button leftButton;
     private Button rightButton;
 
-    private TextView titleTextView;
-    private ImageView imageView;
-    private TextView textView;
+    //private TextView titleTextView;
+    private ImageView imageView, textImageView;
 
     private int position;
 
@@ -41,38 +40,42 @@ public class InventoryExplorerActivity extends AppCompatActivity {
         leftButton = findViewById(R.id.inventoryLeftButton);
         rightButton = findViewById(R.id.inventoryRightButton);
 
-        titleTextView = findViewById(R.id.inventoryTitleTextView);
+        //titleTextView = findViewById(R.id.inventoryTitleTextView);
         imageView = findViewById(R.id.inventoryArtifactImageView);
-        textView = findViewById(R.id.inventoryArtifactDescriptionTextView);
+        textImageView = findViewById(R.id.inventoryDescrBorderImageView);
 
-        artifactNames = new ArrayList<>();
+        //artifactNames = new ArrayList<>();
         artifactImages = new ArrayList<>();
         artifactTexts = new ArrayList<>();
 
         //MASU VK
-        artifactNames.add(getResources().getString(R.string.artifact_masuvk_title));
-        artifactImages.add(R.drawable.artifact_masuvk);
-        artifactTexts.add(getResources().getString(R.string.artifact_masuvk_text));
+        //artifactNames.add(getResources().getString(R.string.artifact_masuvk_title));
+        artifactImages.add(R.drawable.strazhnik);
+        artifactImages.add(R.drawable.logistic);
+        artifactImages.add(R.drawable.safe);
 
-        //ecobiopath
-        artifactNames.add(getResources().getString(R.string.artifact_ecobiopath_title));
-        artifactImages.add(R.drawable.artifact_ecobiopathmap);
-        artifactTexts.add(getResources().getString(R.string.artifact_ecobiopath_text));
+        artifactTexts.add(R.drawable.predystoria_kv1_1);
+        artifactTexts.add(R.drawable.predystoria_kv1_2);
+        artifactTexts.add(R.drawable.predystoria_kv1_3);
 
-        titleTextView.setText(artifactNames.get(position));
-        imageView.setImageResource(artifactImages.get(position));
-        textView.setText(artifactTexts.get(position));
+//        artifactTexts.add(getResources().getString(R.string.artifact_masuvk_text));
+//
+//        //ecobiopath
+//        artifactNames.add(getResources().getString(R.string.artifact_ecobiopath_title));
+//
+//        artifactImages.add(R.drawable.artifact_ecobiopathmap);
+//        artifactTexts.add(getResources().getString(R.string.artifact_ecobiopath_text));
+
         leftButton.setBackgroundResource(R.drawable.inventory_button_left_right_off);
+
+        initAt(position);
 
         rightButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (position < artifactImages.size() - 1) {
                         position++;
-                        int id = artifactImages.get(position);
-                        titleTextView.setText(artifactNames.get(position));
-                        imageView.setImageResource(id);
-                        textView.setText(artifactTexts.get(position));
+                        initAt(position);
 //                        if (position == artifactImages.size() - 1)
 //                            rightButton.setBackgroundResource(R.drawable.inventory_button_left_right_off);
                         if (position == 1) leftButton.setBackgroundResource(R.drawable.inventory_button_left);
@@ -89,10 +92,7 @@ public class InventoryExplorerActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (position > 0) {
                         position--;
-                        int id = artifactImages.get(position);
-                        titleTextView.setText(artifactNames.get(position));
-                        imageView.setImageResource(id);
-                        textView.setText(artifactTexts.get(position));
+                        initAt(position);
                         if (position == 0)
                             leftButton.setBackgroundResource(R.drawable.inventory_button_left_right_off);
                         if (position == artifactImages.size() - 2)
@@ -102,6 +102,13 @@ public class InventoryExplorerActivity extends AppCompatActivity {
 
         });
     }
+
+    private void initAt(int pos){
+        //titleTextView.setText(artifactNames.get(pos));
+        imageView.setImageResource(artifactImages.get(pos));
+        textImageView.setImageResource(artifactTexts.get(pos));
+    }
+
     public void nextAction(View view) {
         Intent intent = null;
         switch (position) {
