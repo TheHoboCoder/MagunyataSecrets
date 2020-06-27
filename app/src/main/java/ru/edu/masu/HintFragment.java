@@ -65,10 +65,10 @@ public class HintFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hint,container,false);
-        TextView descTxt = view.findViewById(R.id.descTxt);
-        descTxt.setText(description);
-        ImageView imageView = view.findViewById(R.id.imageView);
-        imageView.setImageResource(imageResId);
+        //TextView descTxt = view.findViewById(R.id.descTxt);
+        //descTxt.setText(description);
+//        ImageView imageView = view.findViewById(R.id.imageView);
+//        imageView.setImageResource(imageResId);
         Button okBtn = view.findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override

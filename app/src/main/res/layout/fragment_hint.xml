@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -26,34 +26,36 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="Подсказка" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:text="Подсказка" />-->
 
             <ImageView
                 android:id="@+id/imageView"
+                android:padding="8dp"
+                android:src="@drawable/podskazka_logistik_kv1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:contentDescription="тут изображение"
                 android:scaleType="centerInside" />
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4">
+<!--            <ScrollView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="4">-->
 
-                <TextView
-                    android:id="@+id/descTxt"
-                    android:textAlignment="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/text_padding"
-                    android:paddingEnd="@dimen/text_padding" />
-            </ScrollView>
+<!--                <TextView-->
+<!--                    android:id="@+id/descTxt"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingStart="@dimen/text_padding"-->
+<!--                    android:paddingEnd="@dimen/text_padding" />-->
+<!--            </ScrollView>-->
 
 
         </LinearLayout>

@@ -24,7 +24,7 @@ public class MeetActivity extends AppCompatActivity implements MonsterInfoFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meet);
         monsters = new ArrayList<>();
-        monsters.add(new Monster(R.drawable.strazhnik,"Стражник", getString(R.string.quard_desc)));
+        monsters.add(new Monster(R.drawable.strazhnik,"Страж", getString(R.string.quard_desc)));
         monsters.add(new Monster(R.drawable.sessia_sketch,"Сессия",getString(R.string.session_desc)));
         monsters.add(new Monster(R.drawable.logistic,"Логистик", getString(R.string.logistic_desc)));
         monsters.add(new Monster(R.drawable.neryakha_sketch,"Неряха",getString(R.string.neryaha_desc)));

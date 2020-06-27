@@ -45,7 +45,6 @@
         android:layout_height="0dp"
         android:layout_weight = "1"
         android:orientation="horizontal">
-        <!--TODO: remove click listener-->
         <androidx.cardview.widget.CardView
             android:layout_gravity="center"
             android:layout_width="0dp"
@@ -55,7 +54,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="15dp"
             app:cardElevation="8dp"
-            android:onClick="testCamera"
+            android:onClick="showDescription"
             android:layout_height="match_parent"
             android:layout_weight="1">
             <androidx.constraintlayout.widget.ConstraintLayout

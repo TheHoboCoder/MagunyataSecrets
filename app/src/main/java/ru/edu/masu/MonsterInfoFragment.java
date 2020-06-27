@@ -63,7 +63,6 @@ public class MonsterInfoFragment extends Fragment {
      * @param desc Parameter description.
      * @return A new instance of fragment MonsterInfoFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MonsterInfoFragment newInstance(int picId, String name, String desc) {
         MonsterInfoFragment fragment = new MonsterInfoFragment();
         Bundle args = new Bundle();
