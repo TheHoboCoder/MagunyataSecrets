@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Секреты Магунят</string>
     <string name="start_game">Начать</string>
-    <string name="meet">Знакомтесь:</string>
+    <string name="meet">Знакомьтесь:</string>
     <string name="ok">ОК</string>
     <string name="cancel">Отмена</string>
     <string name="next">Далее</string>
@@ -12,10 +12,14 @@
     <string name="equipment">Инвентарь</string>
     <string name="hint">Подсказка</string>
     <string name="story">Посмотреть историю</string>
-    <string name="find">Найдите Х, текст задания</string>
+    <string name="find">Помоги Стражу найти потерянный код!</string>
     <string name="line">___________________________________________________________________________________________</string>
     <string name="progress">Вы прошли 0/10</string>
     <string name="image">КиИКИиИКИИИИИсКИ</string>
+
+    <string name="quest_status_locked">Недоступно</string>
+    <string name="quest_status_active">Текущий</string>
+    <string name="quest_status_finished">Пройден</string>
 
     <string name="failure">Что-то пошло не так :(</string>
     <string name="quitGame">Вы действительно хотите завершить игру?</string>
@@ -32,7 +36,7 @@
     <string name="session_desc">Не так страшна, как может показаться на первый взгляд. Или наоборот? \n «Сначала ты работаешь на зачётку, затем зачётка работает на тебя!»</string>
     <string name="logistic_desc">Славный малый. Ты поможешь ему — он поможет тебе дорогу к нужному кабинету знает только он \n «Таков путь»</string>
     <string name="neryaha_desc">Сто раз подумай, прежде чем давать ему свои тетрадки и важные бумаги! \n «Не терял я второй кроссовок, это так модно сейчас!»</string>
-    <string name="sociofob_desc">Будь паинькой и не спугни его, кажется, он не очень был готов к твоему появлению</string>
-    <string name="hungry_desc">Пока ты переживаешь о сессии, этот бедняжка думает о насущных проблемах!</string>
-    <string name="burea_desc">Кажется, он буквально молится на бумажки.. Из его кабинета постоянно слышен шелест файликов</string>
+    <string name="sociofob_desc">Будь паинькой и не спугни его, кажется, он не очень был готов к твоему появлению </string>
+    <string name="hungry_desc">Пока ты переживаешь о сессии, этот бедняжка думает о насущных проблемах! \n «Кушать?»</string>
+    <string name="burea_desc">Кажется, он буквально молится на бумажки.. Из его кабинета постоянно слышен шелест файликов \n «О, ты принес справку! Нет? Тогда чего ты ждешь от меня?»</string>
 </resources>

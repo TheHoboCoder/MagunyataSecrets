@@ -26,7 +26,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
         this.context   = context;
     }
 
-    class QuestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class QuestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public ImageView image;
         public TextView name;
@@ -59,10 +59,29 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
     @Override
     public void onBindViewHolder(@NonNull QuestViewHolder holder, int position) {
         QuestItem questItem = arrayList.get(position);
-        holder.quest_item_layout.setBackgroundResource(questItem.getBackground());
+        int background = -1;
+        String status = "";
+        Context context = holder.itemView.getContext();
+        switch(questItem.getStatus()){
+            case LOCKED:
+                background = R.drawable.bg3;
+                status = context.getString(R.string.quest_status_locked);
+                break;
+            case ACTIVE:
+                background = R.drawable.bg2;
+                status = context.getString(R.string.quest_status_active);
+                break;
+            case FINISHED:
+                //TODO: add quest finished background
+                status = context.getString(R.string.quest_status_finished);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + questItem.getStatus());
+        }
+        holder.quest_item_layout.setBackgroundResource(background);
         holder.image.setImageResource(questItem.getImage());
         holder.name.setText(questItem.getName());
-        holder.status.setText(questItem.getStatus());
+        holder.status.setText(status);
     }
 
     @Override

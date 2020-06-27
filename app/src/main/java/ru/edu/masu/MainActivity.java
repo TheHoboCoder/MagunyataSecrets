@@ -33,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<QuestItem> questItems = new ArrayList<>();
-        questItems.add(new QuestItem(R.drawable.kiski, "Квест 1", "Текущий",R.drawable.bg2));
+        QuestItem quest = new QuestItem(R.drawable.kiski, "Квест 1");
+        questItems.add(quest);
 
         for (int i = 2; i < 11; i++)  {
-            questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i, "Недоступно",R.drawable.bg3));
+            questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i));
         }
+        quest.start();
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         adapter = new QuestItemRVMainAdapter(questItems, this);
@@ -84,23 +86,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    //example using ScanActivity
-    //TODO:remove this
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ScanActivity.REQUEST_SCAN_ACTIVITY &&
-                resultCode == ScanActivity.RESULT_BARCODE_FOUND ){
-            String resData = data.getStringExtra(ScanActivity.BARCODE_TEXT);
-            Toast toast = Toast.makeText(MainActivity.this, resData, Toast.LENGTH_LONG);
-            toast.show();
-        }
-    }
 
-    public void testCamera(View view) {
-        Intent intent = new Intent(MainActivity.this, ScanActivity.class);
-        startActivityForResult(intent,ScanActivity.REQUEST_SCAN_ACTIVITY);
-    }
 
     public void inventoryClick(View view) {
         Intent intent = new Intent(MainActivity.this, InventoryExplorerActivity.class);
@@ -111,5 +97,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
         intent.putExtra("DESC","HELLO_THERE");
         startActivity(intent);
+    }
+
+    public void onQuestPassBtnClick(View view) {
+        QuestPassFragment fr = new QuestPassFragment();
+        fr.show(getSupportFragmentManager(),"questPass");
     }
 }
