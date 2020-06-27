@@ -1,4 +1,4 @@
-package ru.edu.masu.data;
+package ru.edu.masu.model;
 
 import ru.edu.masu.model.IQuestFinished;
 

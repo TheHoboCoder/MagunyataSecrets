@@ -3,8 +3,6 @@ package ru.edu.masu.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.edu.masu.data.IQuestPass;
-
 public class QuestPassImpl implements IQuestPass {
 
     private List<IQuestFinished> iQuestFinishedCallbacks;
