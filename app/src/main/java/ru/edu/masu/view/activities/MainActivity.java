@@ -1,24 +1,28 @@
-package ru.edu.masu;
+package ru.edu.masu.view.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ru.edu.masu.R;
 import ru.edu.masu.adapters.QuestItemRVMainAdapter;
-import ru.edu.masu.data.QuestItem;
-import ru.edu.masu.utils.ScanActivity;
+import ru.edu.masu.model.data.entities.QuestItem;
+import ru.edu.masu.model.IQuestFinished;
+import ru.edu.masu.model.IQuestPass;
+import ru.edu.masu.model.CodeQuestPass;
+import ru.edu.masu.utils.QuestPassFragmentProvider;
+import ru.edu.masu.view.dialogs.HintFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private CountDownTimer timer;
+    private QuestItem current;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -33,13 +38,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<QuestItem> questItems = new ArrayList<>();
-        QuestItem quest = new QuestItem(R.drawable.kiski, "Квест 1");
-        questItems.add(quest);
-
+        current = new QuestItem(R.drawable.kiski, "Квест 1");
+        questItems.add(current);
         for (int i = 2; i < 11; i++)  {
             questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i));
         }
-        quest.start();
+
+        current.start();
+        final IQuestFinished questFinishedCallback = new IQuestFinished() {
+            @Override
+            public void onFinish() {
+                Toast t = Toast.makeText(MainActivity.this,"Квест сдан",Toast.LENGTH_SHORT);
+                t.show();
+            }
+            @Override
+            public void onPassFailed() {
+                Toast t = Toast.makeText(MainActivity.this,"Неверный код",Toast.LENGTH_SHORT);
+                t.show();
+            }
+        };
+        CodeQuestPass stringQuestPass = new CodeQuestPass("123");
+        stringQuestPass.addCallback(questFinishedCallback);
+        current.setQuestPass(stringQuestPass);
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         adapter = new QuestItemRVMainAdapter(questItems, this);
@@ -56,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-                    HintFragment fr = HintFragment.newInstance(R.drawable.sociofob,"Описание");
+                    HintFragment fr = HintFragment.newInstance(R.drawable.podskazka_logistik_kv1,"Описание");
                     fr.setCancelable(false);
                     fr.show(getSupportFragmentManager(),"hint");
                 }
@@ -100,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onQuestPassBtnClick(View view) {
-        QuestPassFragment fr = new QuestPassFragment();
-        fr.show(getSupportFragmentManager(),"questPass");
+        IQuestPass questPass = current.getQuestPass();
+        if(QuestPassFragmentProvider.isDialog(questPass)){
+            DialogFragment fr = (DialogFragment) QuestPassFragmentProvider.get(questPass);
+            fr.show(getSupportFragmentManager(),null);
+        }
     }
 }

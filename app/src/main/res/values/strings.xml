@@ -39,4 +39,11 @@
     <string name="sociofob_desc">Будь паинькой и не спугни его, кажется, он не очень был готов к твоему появлению </string>
     <string name="hungry_desc">Пока ты переживаешь о сессии, этот бедняжка думает о насущных проблемах! \n «Кушать?»</string>
     <string name="burea_desc">Кажется, он буквально молится на бумажки.. Из его кабинета постоянно слышен шелест файликов \n «О, ты принес справку! Нет? Тогда чего ты ждешь от меня?»</string>
+    <string name="quard_name">Страж</string>
+    <string name="sociofob_name">Социофоб</string>
+    <string name="hungry_name">Голодный</string>
+    <string name="burea_name">Бюрократ</string>
+    <string name="neryaha_name">Неряха</string>
+    <string name="logistic_name">Логистик</string>
+    <string name="session_name">Сессия</string>
 </resources>

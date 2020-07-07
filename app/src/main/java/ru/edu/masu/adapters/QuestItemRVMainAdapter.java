@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ru.edu.masu.R;
-import ru.edu.masu.data.QuestItem;
+import ru.edu.masu.model.data.entities.QuestItem;
 
 public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMainAdapter.QuestViewHolder> {
 
@@ -73,6 +73,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
                 break;
             case FINISHED:
                 //TODO: add quest finished background
+                background = R.drawable.bg3;
                 status = context.getString(R.string.quest_status_finished);
                 break;
             default:

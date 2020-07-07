@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DescriptionActivity"></activity>
+        <activity android:name=".view.activities.DescriptionActivity"></activity>
 
         <activity
             android:name=".utils.ScanActivity"
@@ -18,22 +18,22 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".MeetActivity"
+            android:name=".view.activities.MeetActivity"
             android:noHistory="true" />
         <!--
 Meet Activity won't be added to back stack,
         user will navigate back from MainActivity to StartActivity
         -->
-        <activity android:name=".InventoryExplorerActivity" />
-        <activity android:name=".EcoBioMapActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".view.activities.InventoryExplorerActivity" />
+        <activity android:name=".view.activities.EcoBioMapActivity" />
+        <activity android:name=".view.activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".view.activities.MainActivity" />
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode" />

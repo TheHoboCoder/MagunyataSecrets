@@ -3,12 +3,12 @@ package ru.edu.masu.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestPassImpl implements IQuestPass {
+public class CodeQuestPass implements IQuestPass {
 
     private List<IQuestFinished> iQuestFinishedCallbacks;
     private String passCode;
 
-    public QuestPassImpl(String passCode){
+    public CodeQuestPass(String passCode){
         this.passCode = passCode;
         iQuestFinishedCallbacks = new ArrayList<>();
     }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MeetActivity">
+    tools:context=".view.activities.MeetActivity">
 
     <TextView
         android:layout_margin="@dimen/default_margin"
@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/nextBtn"
         android:enabled="false"
-        android:background="@drawable/button"
+        android:background="@drawable/btn_states"
         android:onClick="onNextBtnClick"
         android:layout_gravity="end"
         android:textColor="@color/white"

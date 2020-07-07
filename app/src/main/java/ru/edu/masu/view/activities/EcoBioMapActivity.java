@@ -1,6 +1,7 @@
-package ru.edu.masu;
+package ru.edu.masu.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ru.edu.masu.R;
 
 import android.os.Bundle;
 

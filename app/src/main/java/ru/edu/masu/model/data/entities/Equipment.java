@@ -1,4 +1,4 @@
-package ru.edu.masu.data;
+package ru.edu.masu.model.data.entities;
 
 //TODO: this
 public class Equipment {
