@@ -15,7 +15,7 @@ public class QuestItem {
     private int questProviderImg;
     //изображение монстра помощника
     private int questHelperImg;
-    private ArrayList<QuestItem> questStory;
+    private ArrayList<StoryItem> questStory;
     private ArrayList<Equipment> equipment;
     private IQuestPass questPass;
 
@@ -94,11 +94,11 @@ public class QuestItem {
         this.questHelperImg = questHelperImg;
     }
 
-    public ArrayList<QuestItem> getQuestStory() {
+    public ArrayList<StoryItem> getQuestStory() {
         return questStory;
     }
 
-    public void setQuestStory(ArrayList<QuestItem> questStory) {
+    public void setQuestStory(ArrayList<StoryItem> questStory) {
         this.questStory = questStory;
     }
 
