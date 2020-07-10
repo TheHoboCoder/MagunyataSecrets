@@ -12,16 +12,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.edu.masu.R;
 import ru.edu.masu.model.data.entities.QuestItem;
 
 public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMainAdapter.QuestViewHolder> {
 
-    ArrayList<QuestItem> arrayList;
+    List<QuestItem> arrayList;
     Context context;
 
-    public QuestItemRVMainAdapter(ArrayList<QuestItem> arrayList, Context context) {
+    public QuestItemRVMainAdapter(List<QuestItem> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context   = context;
     }
