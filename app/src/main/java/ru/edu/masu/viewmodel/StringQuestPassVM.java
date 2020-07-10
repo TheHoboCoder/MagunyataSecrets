@@ -11,8 +11,8 @@ public class StringQuestPassVM extends ViewModel {
         this.questPass = questPass;
     }
 
-    public void tryPass(String passCode){
-        questPass.enterCode(passCode);
+    public boolean tryPass(String passCode){
+        return questPass.enterCode(passCode);
     }
 
 }

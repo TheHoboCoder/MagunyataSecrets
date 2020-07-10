@@ -13,7 +13,7 @@ public class CodeQuestPass implements IQuestPass {
         iQuestFinishedCallbacks = new ArrayList<>();
     }
 
-    public void enterCode(String code){
+    public boolean enterCode(String code){
         boolean finished = passCode.equals(code);
         for(IQuestFinished callback:iQuestFinishedCallbacks){
             if(finished){
@@ -23,10 +23,16 @@ public class CodeQuestPass implements IQuestPass {
                 callback.onPassFailed();
             }
         }
+        return finished;
     }
 
     @Override
     public void addCallback(IQuestFinished iQuestFinished) {
         this.iQuestFinishedCallbacks.add(iQuestFinished);
+    }
+
+    @Override
+    public void removeAllCallbacks() {
+        iQuestFinishedCallbacks.clear();
     }
 }

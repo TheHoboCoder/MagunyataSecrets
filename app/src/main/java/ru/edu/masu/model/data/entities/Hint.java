@@ -6,6 +6,12 @@ public class Hint {
     private int hintImage;
     private String hintText;
 
+    public Hint(String hintText, int hintImage, int delay){
+        setHintImage(hintImage);
+        setHintText(hintText);
+        setDelay(delay);
+    }
+
     public int getDelay() {
         return delay;
     }

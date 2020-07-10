@@ -28,6 +28,7 @@
             android:contentDescription="@string/hint"
             android:src="@drawable/kiski"
             android:scaleType="centerInside"
+            android:onClick="onHintBtnClick"
             android:layout_width="@dimen/main_toolbar_h"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,6 +138,7 @@
         android:layout_marginTop="15dp"
         >
         <TextView
+            android:id="@+id/progressTxt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

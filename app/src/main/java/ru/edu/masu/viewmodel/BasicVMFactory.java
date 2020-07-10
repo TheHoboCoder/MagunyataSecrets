@@ -22,7 +22,7 @@ public class BasicVMFactory implements ViewModelProvider.Factory {
             classes[i] = constructorParams[i].getClass();
         }
         try {
-            return modelClass.getConstructor(classes).newInstance(constructorParams);
+            return modelClass.getDeclaredConstructor(classes).newInstance(constructorParams);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

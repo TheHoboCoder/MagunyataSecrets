@@ -5,11 +5,13 @@ import android.os.Bundle;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
 import ru.edu.masu.model.CodeQuestPass;
+import ru.edu.masu.model.IQuestFinished;
 import ru.edu.masu.viewmodel.BasicVMFactory;
 import ru.edu.masu.viewmodel.StringQuestPassVM;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class StringQuestPassFragment extends BasicDialogFragment {
 
@@ -44,7 +46,13 @@ public class StringQuestPassFragment extends BasicDialogFragment {
 
     @Override
     protected void onActionBtnClick(View v){
-        questPassVM.tryPass(editText.getText().toString());
+        if(questPassVM.tryPass(editText.getText().toString())){
+            this.dismiss();
+        }
+        else{
+            Toast toast = Toast.makeText(this.getContext(),"Неверный код!",Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     @Override

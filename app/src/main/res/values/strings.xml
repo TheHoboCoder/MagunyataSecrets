@@ -14,7 +14,7 @@
     <string name="story">Посмотреть историю</string>
     <string name="find">Помоги Стражу найти потерянный код!</string>
     <string name="line">___________________________________________________________________________________________</string>
-    <string name="progress">Вы прошли 0/10</string>
+    <string name="progress">Вы прошли %1$d/%2$d</string>
     <string name="image">КиИКИиИКИИИИИсКИ</string>
 
     <string name="quest_status_locked">Недоступно</string>

@@ -1,6 +1,7 @@
 package ru.edu.masu.model.data.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.edu.masu.model.IQuestFinished;
 import ru.edu.masu.model.IQuestPass;
@@ -15,8 +16,9 @@ public class QuestItem {
     private int questProviderImg;
     //изображение монстра помощника
     private int questHelperImg;
-    private ArrayList<StoryItem> questStory;
-    private ArrayList<Equipment> equipment;
+    private List<StoryItem> questStory;
+    private List<Equipment> equipment;
+    private List<Hint> questHints;
     private IQuestPass questPass;
 
     public enum Status{
@@ -41,21 +43,14 @@ public class QuestItem {
         status = Status.ACTIVE;
     }
 
+    public void finish(){
+        status = Status.FINISHED;
+    }
+
     public Status getStatus() { return status; }
 
     public void setQuestPass(IQuestPass questPass) {
         this.questPass = questPass;
-        questPass.addCallback(new IQuestFinished() {
-            @Override
-            public void onFinish() {
-                status = Status.FINISHED;
-            }
-
-            @Override
-            public void onPassFailed() {
-
-            }
-        });
     }
 
     public IQuestPass getQuestPass() {
@@ -94,20 +89,28 @@ public class QuestItem {
         this.questHelperImg = questHelperImg;
     }
 
-    public ArrayList<StoryItem> getQuestStory() {
+    public List<StoryItem> getQuestStory() {
         return questStory;
     }
 
-    public void setQuestStory(ArrayList<StoryItem> questStory) {
+    public void setQuestStory(List<StoryItem> questStory) {
         this.questStory = questStory;
     }
 
-    public ArrayList<Equipment> getEquipment() {
+    public List<Equipment> getEquipment() {
         return equipment;
     }
 
     public void setEquipment(ArrayList<Equipment> equipment) {
         this.equipment = equipment;
+    }
+
+    public List<Hint> getQuestHints() {
+        return questHints;
+    }
+
+    public void setQuestHints(List<Hint> questHints) {
+        this.questHints = questHints;
     }
 
 
