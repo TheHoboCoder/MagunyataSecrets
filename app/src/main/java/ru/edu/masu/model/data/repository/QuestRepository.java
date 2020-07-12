@@ -22,7 +22,7 @@ public class QuestRepository implements IRepository<QuestItem> {
         firstQuest.setQuestProviderImg(R.drawable.strazhnik);
         firstQuest.setQuestHelperImg(R.drawable.sociofob);
         //способ сдачи квеста - ввод пароля
-        firstQuest.setQuestPass(new CodeQuestPass("123"));
+        firstQuest.setQuestPass(new CodeQuestPass("123", CodeQuestPass.PassType.TEXT));
         //предыстория
         List<StoryItem> questStory = new ArrayList<>();
         questStory.add(new StoryItem(R.drawable.strazhnik, R.drawable.predystoria_kv1_1));
@@ -41,14 +41,27 @@ public class QuestRepository implements IRepository<QuestItem> {
         testQuest.setQuestProviderImg(R.drawable.sessia_sketch);
         testQuest.setQuestHelperImg(R.drawable.golodny_sketch);
         //способ сдачи квеста - ввод пароля
-        testQuest.setQuestPass(new CodeQuestPass("321"));
+        testQuest.setQuestPass(new CodeQuestPass("321", CodeQuestPass.PassType.TEXT));
         testQuest.setQuestHints(hints);
+
+        QuestItem qrQuest = new QuestItem(R.drawable.kiski, "Тест с QR");
+        qrQuest.setTask("Тут написано задание квеста");
+        qrQuest.setQuestProviderImg(R.drawable.logistic);
+        qrQuest.setQuestHelperImg(R.drawable.kiski);
+        qrQuest.setQuestPass(new CodeQuestPass("QR code quest!", CodeQuestPass.PassType.QR));
+        qrQuest.setQuestHints(hints);
 
         questItems.add(firstQuest);
         questItems.add(testQuest);
+        questItems.add(qrQuest);
 
-        for (int i = 2; i < 11; i++)  {
-            questItems.add(new QuestItem(R.drawable.kiski, "Квест "+i));
+        for (int i = 3; i <= 10; i++)  {
+            QuestItem testItem = new QuestItem(R.drawable.kiski, "Квест "+i);
+            testItem.setQuestHints(hints);
+            testItem.setQuestProviderImg(R.drawable.golodny_sketch);
+            testItem.setQuestHelperImg(R.drawable.logistic);
+            testItem.setQuestPass(new CodeQuestPass("Квест "+ i, CodeQuestPass.PassType.TEXT));
+            questItems.add(testItem);
         }
         return questItems;
     }
