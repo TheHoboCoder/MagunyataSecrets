@@ -1,9 +1,10 @@
 package ru.edu.masu.utils;
 
 import androidx.fragment.app.Fragment;
-import ru.edu.masu.view.dialogs.StringQuestPassFragment;
+import ru.edu.masu.view.dialogs.CodeQuestPassFragment;
 import ru.edu.masu.model.IQuestPass;
 import ru.edu.masu.model.CodeQuestPass;
+import ru.edu.masu.view.fragments.QRScanFragment;
 
 public class QuestPassFragmentProvider {
 
@@ -12,7 +13,13 @@ public class QuestPassFragmentProvider {
     * */
     public static Fragment get(IQuestPass questPass){
         if(questPass instanceof CodeQuestPass){
-            return StringQuestPassFragment.newInstance((CodeQuestPass)questPass);
+            CodeQuestPass codeQuestPass = (CodeQuestPass) questPass;
+            if(codeQuestPass.getPassType() == CodeQuestPass.PassType.TEXT){
+                return CodeQuestPassFragment.newInstance(codeQuestPass);
+            }
+            else{
+                return new QRScanFragment();
+            }
         }
         return null;
     }
@@ -20,6 +27,7 @@ public class QuestPassFragmentProvider {
     public static boolean isDialog(IQuestPass questPass){
         //Add here all IQuestPass Implementations that should be shown as Dialog
         //their fragments must extend DialogFragment or it subclasses
-        return (questPass instanceof CodeQuestPass);
+        return (questPass instanceof CodeQuestPass
+                && ((CodeQuestPass) questPass).getPassType() == CodeQuestPass.PassType.TEXT);
     }
 }
