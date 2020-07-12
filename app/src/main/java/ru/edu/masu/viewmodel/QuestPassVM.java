@@ -16,6 +16,7 @@ public class QuestPassVM extends ViewModel implements IQuestPassHolder {
 
     public QuestPassVM(IQuestPass questPass){
         this.questPass = questPass;
+        isPassed = new MutableLiveData<>();
     }
 
     @Override

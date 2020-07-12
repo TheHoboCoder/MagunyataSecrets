@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 import ru.edu.masu.R;
 import ru.edu.masu.adapters.QuestItemRVMainAdapter;
@@ -156,6 +157,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == QuestPassActivity.REQUEST_CODE &&
+                resultCode == QuestPassActivity.QUEST_PASSED){
+            IQuestPass questPass = data.getParcelableExtra(QuestPassActivity.IQUEST_PASS_PARCEABLE);
+            mainVM.check(questPass);
+        }
+    }
+
+        @Override
     public void onBackPressed() {
         AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                .setMessage(R.string.quitGame)
@@ -176,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void inventoryClick(View view) {
         Intent intent = new Intent(MainActivity.this, InventoryExplorerActivity.class);
         startActivity(intent);
@@ -189,12 +199,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onQuestPassBtnClick(View view) {
-        IQuestPass questPass = mainVM.getCurrentQuest().getValue().getQuestPass();
+        IQuestPass questPass = Objects.requireNonNull(mainVM.getCurrentQuest().getValue()).getQuestPass();
         if(QuestPassFragmentProvider.isDialog(questPass)){
             if(questPassDialog == null){
                 questPassDialog = (DialogFragment) QuestPassFragmentProvider.get(questPass);
             }
             questPassDialog.show(getSupportFragmentManager(),"questPass");
+        }
+        else{
+            Intent intent = new Intent(MainActivity.this, QuestPassActivity.class);
+            intent.putExtra(QuestPassActivity.IQUEST_PASS_PARCEABLE, questPass);
+            startActivityForResult(intent, QuestPassActivity.REQUEST_CODE);
         }
     }
 
