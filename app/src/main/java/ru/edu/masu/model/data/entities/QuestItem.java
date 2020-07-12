@@ -3,7 +3,6 @@ package ru.edu.masu.model.data.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.edu.masu.model.IQuestFinished;
 import ru.edu.masu.model.IQuestPass;
 
 public class QuestItem {
