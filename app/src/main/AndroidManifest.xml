@@ -10,13 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.DescriptionActivity"></activity>
-
+        <activity android:name=".view.activities.QuestPassActivity"></activity>
+        <activity android:name=".view.activities.DescriptionActivity" />
         <activity
             android:name=".utils.ScanActivity"
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
             android:name=".view.activities.MeetActivity"
             android:noHistory="true" />
@@ -34,13 +33,14 @@ Meet Activity won't be added to back stack,
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.MainActivity" />
+
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

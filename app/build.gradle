@@ -61,4 +61,6 @@ dependencies {
 
     // Annotation processor
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+
 }
