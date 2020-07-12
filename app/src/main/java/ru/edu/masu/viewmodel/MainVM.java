@@ -1,18 +1,18 @@
 package ru.edu.masu.viewmodel;
 
 import java.util.List;
+import java.util.Objects;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import ru.edu.masu.model.IQuestFinished;
 import ru.edu.masu.model.IQuestPass;
+import ru.edu.masu.model.IQuestPassHolder;
 import ru.edu.masu.model.data.entities.Hint;
 import ru.edu.masu.model.data.entities.QuestItem;
 import ru.edu.masu.model.data.repository.IRepository;
-import ru.edu.masu.model.data.repository.QuestRepository;
 
-public class MainVM extends ViewModel implements IQuestFinished {
+public class MainVM extends ViewModel implements IQuestPassHolder {
 
     private MutableLiveData<QuestItem> currentQuest;
     public LiveData<QuestItem> getCurrentQuest(){
@@ -53,7 +53,6 @@ public class MainVM extends ViewModel implements IQuestFinished {
     public void toNextQuest(){
         int progressValue = progress.getValue();
         QuestItem old = getCurrentQuest().getValue();
-        old.getQuestPass().removeAllCallbacks();
         progressValue++;
         progress.setValue(progressValue);
         setCurrentQuest(progressValue);
@@ -72,7 +71,6 @@ public class MainVM extends ViewModel implements IQuestFinished {
         }
         QuestItem current = getQuestItems().get(pos);
         current.start();
-        current.getQuestPass().addCallback(this);
         currentQuest.setValue(current);
     }
 
@@ -86,14 +84,18 @@ public class MainVM extends ViewModel implements IQuestFinished {
     }
 
     @Override
-    public void onFinish() {
-        QuestItem current = currentQuest.getValue();
-        current.finish();
-        currentQuest.setValue(current);
+    public IQuestPass provideQuestPass() {
+        return Objects.requireNonNull(currentQuest.getValue()).getQuestPass();
     }
 
     @Override
-    public void onPassFailed() {
-
+    public void check(IQuestPass questPass) {
+        IQuestPass currentQuestPass = provideQuestPass();
+        currentQuestPass.from(questPass);
+        if(currentQuestPass.isPassed()){
+            QuestItem current = Objects.requireNonNull(currentQuest.getValue());
+            current.finish();
+            currentQuest.setValue(current);
+        }
     }
 }

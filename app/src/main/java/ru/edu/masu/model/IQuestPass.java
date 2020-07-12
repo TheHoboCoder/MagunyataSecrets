@@ -1,6 +1,8 @@
 package ru.edu.masu.model;
 
-public interface IQuestPass {
-    void addCallback(IQuestFinished iQuestFinished);
-    void removeAllCallbacks();
+import android.os.Parcelable;
+
+public interface IQuestPass extends Parcelable {
+    boolean isPassed();
+    void from(IQuestPass questPass);
 }
