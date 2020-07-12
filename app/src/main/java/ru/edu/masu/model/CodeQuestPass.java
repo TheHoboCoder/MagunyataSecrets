@@ -10,8 +10,20 @@ public class CodeQuestPass implements IQuestPass {
     private String passCode;
     private boolean isPassed;
 
-    public CodeQuestPass(String passCode){
+    public enum PassType{
+        TEXT,
+        QR
+    }
+
+    public PassType getPassType() {
+        return passType;
+    }
+
+    private PassType passType;
+
+    public CodeQuestPass(String passCode, PassType passType){
         this.passCode = passCode;
+        this.passType = passType;
     }
 
     public void enterCode(String code){
@@ -27,7 +39,8 @@ public class CodeQuestPass implements IQuestPass {
     public void from(IQuestPass questPass) {
         if(questPass instanceof CodeQuestPass){
             CodeQuestPass newInstance = (CodeQuestPass) questPass;
-            if(newInstance.passCode.equals(this.passCode)){
+            if(newInstance.passCode.equals(this.passCode)
+                && newInstance.getPassType() == passType){
                 this.isPassed = newInstance.isPassed;
             }
         }
@@ -37,6 +50,8 @@ public class CodeQuestPass implements IQuestPass {
     protected CodeQuestPass(Parcel in){
         isPassed = in.readByte() == 1;
         passCode = in.readString();
+        int ordinalType = in.readInt();
+        passType = PassType.values()[ordinalType];
     }
 
     public static final Creator<CodeQuestPass> CREATOR = new Creator<CodeQuestPass>() {
@@ -60,5 +75,6 @@ public class CodeQuestPass implements IQuestPass {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte((byte) (isPassed ? 1 : 0));
         dest.writeString(passCode);
+        dest.writeInt(passType.ordinal());
     }
 }
