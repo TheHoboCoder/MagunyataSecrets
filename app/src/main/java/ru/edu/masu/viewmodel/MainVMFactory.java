@@ -15,10 +15,11 @@ public class MainVMFactory implements ViewModelProvider.Factory {
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass.isAssignableFrom(MainVM.class)){
             return (T) new MainVM(questItemIRepository);
         }
-        return null;
+        throw new IllegalArgumentException("Wrong VM");
     }
 }
