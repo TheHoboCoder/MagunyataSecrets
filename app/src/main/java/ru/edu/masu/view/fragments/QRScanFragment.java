@@ -28,18 +28,19 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.google.mlkit.vision.barcode.Barcode;
+import com.google.mlkit.vision.barcode.BarcodeScanner;
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
+import com.google.mlkit.vision.barcode.BarcodeScanning;
+import com.google.mlkit.vision.common.InputImage;
+
 
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
 import ru.edu.masu.model.CodeQuestPass;
@@ -57,12 +58,17 @@ public class QRScanFragment extends Fragment {
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PreviewView cameraView;
     private Preview imagePreview;
-
+    private BarcodeScanner detector;
 
     public QRScanFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        detector.close();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,19 +100,25 @@ public class QRScanFragment extends Fragment {
                 imagePreview = new Preview.Builder()
                         //.setTargetResolution(new Size(480,640))
                         .build();
-                imagePreview.setSurfaceProvider(cameraView.getPreviewSurfaceProvider());
+                imagePreview.setSurfaceProvider(cameraView.getSurfaceProvider());
 
                 CameraSelector cameraSelector = new CameraSelector.Builder()
                         .requireLensFacing(CameraSelector.LENS_FACING_BACK)
                         .build();
 
+                BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
+                        //.setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                        .build();
+                detector = BarcodeScanning.getClient(options);
+
                 ImageAnalysis analysis = new ImageAnalysis.Builder()
                         .setTargetResolution(new Size(1280,720))
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
-                analysis.setAnalyzer(Executors.newSingleThreadExecutor(), new QRScanFragment.BarcodeAnalyzer());
+                analysis.setAnalyzer(Executors.newSingleThreadExecutor(),
+                                    new QRScanFragment.BarcodeAnalyzer(detector));
 
-                cameraProvider.bindToLifecycle(QRScanFragment.this,cameraSelector,imagePreview,analysis);
+                cameraProvider.bindToLifecycle((LifecycleOwner)this,cameraSelector,imagePreview,analysis);
 
             } catch (ExecutionException |InterruptedException e) {
                 e.printStackTrace();
@@ -117,60 +129,43 @@ public class QRScanFragment extends Fragment {
 
     private class BarcodeAnalyzer implements ImageAnalysis.Analyzer{
 
-        FirebaseVisionBarcodeDetector detector;
+        BarcodeScanner detector;
 
-        public BarcodeAnalyzer(){
-            FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
-                    .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
-                    .build();
-            detector = FirebaseVision.getInstance().getVisionBarcodeDetector(options);
-        }
-
-        private int degreesToFirebaseRotation(int degrees) {
-            switch (degrees) {
-                case 0:
-                    return FirebaseVisionImageMetadata.ROTATION_0;
-                case 90:
-                    return FirebaseVisionImageMetadata.ROTATION_90;
-                case 180:
-                    return FirebaseVisionImageMetadata.ROTATION_180;
-                case 270:
-                    return FirebaseVisionImageMetadata.ROTATION_270;
-                default:
-                    throw new IllegalArgumentException(
-                            "Rotation must be 0, 90, 180, or 270.");
-            }
+        BarcodeAnalyzer(BarcodeScanner detector){
+            this.detector = detector;
         }
 
         @Override
-        public void analyze(@NonNull ImageProxy image) {
+        public void analyze(@NonNull ImageProxy imageProxy) {
             @SuppressLint("UnsafeExperimentalUsageError")
-            Image img = image.getImage();
-            int firebaseDegreess = degreesToFirebaseRotation(image.getImageInfo().getRotationDegrees());
-            FirebaseVisionImage cur = FirebaseVisionImage.fromMediaImage(img,
-                    firebaseDegreess);
-            detector.detectInImage(cur)
-                    .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
-                        @Override
-                        public void onSuccess(List<FirebaseVisionBarcode> firebaseVisionBarcodes) {
-                            getData(firebaseVisionBarcodes);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast toast = Toast.makeText(getContext(), R.string.failure,Toast.LENGTH_LONG);
-                            toast.show();
-                            e.printStackTrace();
-                        }
-                    });
-            image.close();
+            Image mediaImg = imageProxy.getImage();
+            if (mediaImg != null){
+                InputImage image = InputImage.fromMediaImage(mediaImg,
+                        imageProxy.getImageInfo().getRotationDegrees());
+                detector.process(image)
+                        .addOnSuccessListener(new OnSuccessListener<List<Barcode>>() {
+                            @Override
+                            public void onSuccess(List<Barcode> barcodes) {
+                                getData(barcodes);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast toast = Toast.makeText(getContext(), R.string.failure,Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        })
+                        .addOnCompleteListener(result -> {
+                            imageProxy.close();
+                        });
+            }
 
         }
 
-        private void getData(List<FirebaseVisionBarcode> firebaseVisionBarcodes){
-            if(firebaseVisionBarcodes.size()>0){
-                FirebaseVisionBarcode barcode = firebaseVisionBarcodes.get(0);
+        private void getData(List<Barcode> barcodes){
+            if(barcodes.size()>0){
+                Barcode barcode = barcodes.get(0);
                 String rawValue = barcode.getRawValue();
                 checkPassStatus(rawValue);
             }

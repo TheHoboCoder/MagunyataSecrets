@@ -16,7 +16,7 @@ import android.os.Bundle;
 public class QuestPassActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE = 10;
-    public static final int QUEST_PASSED = 0;
+    public static final int QUEST_PASSED = 5;
     public static final String IQUEST_PASS_PARCEABLE = "IQuestPass";
     private QuestPassVM questPassVM;
 
