@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.QuestPassActivity"></activity>
+        <activity android:name=".view.activities.QuestPassActivity" />
         <activity android:name=".view.activities.DescriptionActivity" />
         <activity
             android:name=".utils.ScanActivity"
