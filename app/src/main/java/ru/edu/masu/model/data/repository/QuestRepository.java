@@ -31,9 +31,9 @@ public class QuestRepository implements IRepository<QuestItem> {
         firstQuest.setQuestStory(questStory);
         //подсказки
         List<Hint> hints = new ArrayList<>();
-        hints.add(new Hint("Описание", R.drawable.podskazka_logistik_kv1, 3000));
-        hints.add(new Hint("Еще одна подсказка", R.drawable.podskazka_logistik_kv1, 4000));
-        hints.add(new Hint("Последняя подсказка", R.drawable.podskazka_logistik_kv1, 5000));
+        hints.add(new Hint("Описание 1", R.drawable.podskazka_logistik_kv1, 3000));
+        hints.add(new Hint("Еще одна подсказка 1", R.drawable.podskazka_logistik_kv1, 4000));
+        hints.add(new Hint("Последняя подсказка 1", R.drawable.podskazka_logistik_kv1, 5000));
         firstQuest.setQuestHints(hints);
 
         QuestItem testQuest = new QuestItem(R.drawable.kiski, "Квест-тест");
@@ -42,14 +42,24 @@ public class QuestRepository implements IRepository<QuestItem> {
         testQuest.setQuestHelperImg(R.drawable.golodny_sketch);
         //способ сдачи квеста - ввод пароля
         testQuest.setQuestPass(new CodeQuestPass("321", CodeQuestPass.PassType.TEXT));
-        testQuest.setQuestHints(hints);
+        //подсказки
+        List<Hint> hints2 = new ArrayList<>();
+        hints2.add(new Hint("Описание 2", R.drawable.podskazka_logistik_kv1, 3000));
+        hints2.add(new Hint("Еще одна подсказка 2", R.drawable.podskazka_logistik_kv1, 4000));
+        hints2.add(new Hint("Последняя подсказка 2", R.drawable.podskazka_logistik_kv1, 5000));
+        testQuest.setQuestHints(hints2);
 
         QuestItem qrQuest = new QuestItem(R.drawable.kiski, "Тест с QR");
         qrQuest.setTask("Тут написано задание квеста");
         qrQuest.setQuestProviderImg(R.drawable.logistic);
         qrQuest.setQuestHelperImg(R.drawable.kiski);
         qrQuest.setQuestPass(new CodeQuestPass("QR code quest!", CodeQuestPass.PassType.QR));
-        qrQuest.setQuestHints(hints);
+        //подсказки
+        List<Hint> hints3 = new ArrayList<>();
+        hints3.add(new Hint("Описание 3", R.drawable.podskazka_logistik_kv1, 3000));
+        hints3.add(new Hint("Еще одна подсказка 3", R.drawable.podskazka_logistik_kv1, 4000));
+        hints3.add(new Hint("Последняя подсказка 3", R.drawable.podskazka_logistik_kv1, 5000));
+        qrQuest.setQuestHints(hints3);
 
         questItems.add(firstQuest);
         questItems.add(testQuest);

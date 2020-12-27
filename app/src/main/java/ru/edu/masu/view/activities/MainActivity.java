@@ -12,9 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -129,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onQuestFinish(QuestItem questItem){
+        //после сдачи квеста подсказки не должны показываться
+        handler.removeCallbacksAndMessages(null);
         //TODO: вывести диалог об окончании квеста
         AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                 .setMessage(questItem.getName()+" завершен!")
@@ -163,6 +168,11 @@ public class MainActivity extends AppCompatActivity {
                 resultCode == QuestPassActivity.QUEST_PASSED){
             IQuestPass questPass = data.getParcelableExtra(QuestPassActivity.IQUEST_PASS_PARCEABLE);
             mainVM.check(questPass);
+        }
+        else{
+            // если квест не был сдан, то после возвращения на текущий экран нужно возобновить показ
+            // подсказок. Отчет времени для показа текущей подсказки будет начат заново.
+            scheduleHintPopup(mainVM.getCurrentHint().getValue());
         }
     }
 
@@ -201,10 +211,26 @@ public class MainActivity extends AppCompatActivity {
     public void onQuestPassBtnClick(View view) {
         IQuestPass questPass = Objects.requireNonNull(mainVM.getCurrentQuest().getValue()).getQuestPass();
         if(QuestPassFragmentProvider.isDialog(questPass)){
+            //на время сдачи квеста отключаем показ подсказок
+            handler.removeCallbacksAndMessages(null);
             if(questPassDialog == null){
                 questPassDialog = (DialogFragment) QuestPassFragmentProvider.get(questPass);
             }
-            questPassDialog.show(getSupportFragmentManager(),"questPass");
+            FragmentManager fm = getSupportFragmentManager();
+            questPassDialog.show(fm,"questPass");
+            //после закрытия диалога
+            // нужно включить показ подсказок. Отчет времени для текущей подсказки будет начат заново.
+            fm.registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
+                @Override
+                public void onFragmentViewDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                    super.onFragmentDestroyed(fm, f);
+                    // если квест был завершен, то показывать подсказки для него больше не нужно
+                    if (mainVM.getCurrentQuest().getValue().getStatus() != QuestItem.Status.FINISHED){
+                        scheduleHintPopup(mainVM.getCurrentHint().getValue());
+                    }
+                    fm.unregisterFragmentLifecycleCallbacks(this);
+                }
+            }, false);
         }
         else{
             Intent intent = new Intent(MainActivity.this, QuestPassActivity.class);
