@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import ru.edu.masu.R;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,6 +29,12 @@ public class StartActivity extends AppCompatActivity {
         //также любая активити, запускаемая с главной активити, не должна добавлятся в стек переходов
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
 
+    //при нажатии на текст вступить и на лого магу будет открываться группа вк
+    public void openVK(View view) {
+        Uri link = Uri.parse(getString(R.string.masu_site));
+        Intent intent = new Intent(Intent.ACTION_VIEW, link);
+        startActivity(intent);
     }
 }
