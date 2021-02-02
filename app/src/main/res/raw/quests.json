@@ -1,0 +1,346 @@
+[
+  {
+    "name": "Первый квест",
+    "description": "Помоги Стражу найти потерянный код!",
+    "questProviderImg": "strazhnik.png",
+    "questHelperImg": "sociofob.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "А ты еще кто? Не мешайся мне тут, я пытаюсь найти важную вещь!"
+      },
+
+      {
+        "img": "logistic.png",
+        "name": "",
+        "description":  "Что случилось, Страж? Ты опять что-то потерял?"
+      },
+
+      {
+        "img": "safe.png",
+        "name": "",
+        "description":  "Да! Я потерял бумагу с кодом от сейфа, пытаюсь сосредоточиться и найти ее, поэтому, Логистик, не мешай!"
+      }
+    ],
+    "hints": [
+      {
+        "name": "Подсказка 1",
+        "description": "Если это листочек, то он мог оставить его среди каких-нибудь бумаг... Кстати, если у тебя есть ненужная макулатура, то можешь сложить её в экодерево рядом со входом",
+        "delay": 3000
+      },
+
+      {
+        "name": "Подсказка 2",
+        "description": "Пам пам",
+        "delay": 4000
+      },
+
+      {
+        "name": "Подсказка 2",
+        "description": "Hello there",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": [
+      {
+        "type": "url",
+        "name": "Артифакт с фото",
+        "url": "http://example.com"
+      },
+
+      {
+        "type": "description",
+        "name": "Артифакт с описанием",
+        "desc": "Текст текст текст",
+        "url": "http://example.com"
+      }
+    ]
+  },
+
+  {
+    "name": "Второй квест",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "sessia_sketch.png",
+    "questHelperImg": "golodny_sketch.png",
+    "questPassId": 1,
+    "questStory": [
+      {
+        "img": "sessia_sketch.png",
+        "name": "",
+        "description":  "Предыстория 1"
+      },
+
+      {
+        "img": "sessia_sketch.png",
+        "name": "",
+        "description":  "Предыстория 2"
+      }
+    ],
+    "hints": [
+      {
+        "name": "Подсказка 3",
+        "description": "подсказка 2",
+        "delay": 3000
+      },
+
+      {
+        "name": "Подсказка 4",
+        "description": "Пам пам",
+        "delay": 4000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Тест с QR",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "logistic.png",
+    "questHelperImg": "kiski.png",
+    "questPassId": 2,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 5",
+        "description": "подсказка 5",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 4",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 5",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 7",
+        "description": "подсказка 7",
+        "delay": 3000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 6",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 7",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 8",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 9",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  },
+
+  {
+    "name": "Квест 10",
+    "description": "Тут написано задание квеста",
+    "questProviderImg": "golodny_sketch.png",
+    "questHelperImg": "logistic.png",
+    "questPassId": 0,
+    "questStory": [
+      {
+        "img": "golodny_sketch.png",
+        "name": "",
+        "description":  "Кушать?"
+      },
+
+      {
+        "img": "strazhnik.png",
+        "name": "",
+        "description":  "NO!"
+      }
+    ],
+
+    "hints": [
+      {
+        "name": "Подсказка 6",
+        "description": "подсказка 6",
+        "delay": 5000
+      }
+    ],
+
+    "artifacts": []
+  }
+]
