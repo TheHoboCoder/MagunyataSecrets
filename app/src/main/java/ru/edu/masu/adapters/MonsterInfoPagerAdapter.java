@@ -40,7 +40,7 @@ public class MonsterInfoPagerAdapter extends FragmentPagerAdapter {
         fragments = new ArrayList<>(monsters.size());
         for(Monster monster: monsters){
             //MonsterInfoFragment fragment = MonsterInfoFragment.newInstance(monster.picId, monster.monsterName, monster.monsterDesc);
-            MonsterInfoFragment fragment = MonsterInfoFragment.newInstance(monster);
+            MonsterInfoFragment fragment = MonsterInfoFragment.newInstance(monsters.indexOf(monster));
             fragments.add(fragment);
         }
     }

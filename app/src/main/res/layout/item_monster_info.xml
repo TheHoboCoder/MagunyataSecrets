@@ -22,7 +22,7 @@
             android:layout_weight="2"
             android:contentDescription="Monter"
             android:scaleType="centerInside"
-            android:src="@drawable/sociofob"
+            android:src="@drawable/kiski"
             app:layout_constraintBottom_toTopOf="@+id/monsterName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

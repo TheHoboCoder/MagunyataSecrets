@@ -11,40 +11,45 @@ public class MonsterVM extends ViewModel {
 
     private MutableLiveData<Boolean> isAllRead;
     private MonsterRepository monsterRepository;
-    private List<Monster> monsters;
+    private MutableLiveData<List<Monster>> monsters;
 
     private int readCount;
 
     public LiveData<Boolean> getRead(){
-        if(isAllRead == null){
-            isAllRead = new MutableLiveData<>();
-            isAllRead.setValue(false);
-        }
         return isAllRead;
     }
 
-    public List<Monster> getMonsters(){
+    public MutableLiveData<List<Monster>> getMonsters(){
+
         if(monsters == null){
-            monsters = this.monsterRepository.getAll();
+            monsters = new MutableLiveData<>();
+            //todo: use executor
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<Monster> value = monsterRepository.getAll();
+                    monsters.postValue(value);
+                }
+            }).start();
         }
         return monsters;
     }
 
     public MonsterVM(MonsterRepository monsterRepository){
         this.monsterRepository = monsterRepository;
+        isAllRead = new MutableLiveData<>();
+
+        isAllRead.setValue(false);
         readCount = 0;
     }
 
     public void setRead(Monster monster){
-        //TODO: предполагается, что id это порядковый номер
-        monster = monsters.get(monster.getMonsterId()-1);
-        if(monster.isMet()){
-           return;
-        }
+        List<Monster> monsterList = monsters.getValue();
+        if (monsterList == null || monster.isMet())
+            return;
         monster.setMet(true);
-        //monsterRepository.update(monster);
         readCount++;
-        if(readCount == monsters.size()){
+        if(readCount == monsters.getValue().size()){
             isAllRead.setValue(true);
         }
     }

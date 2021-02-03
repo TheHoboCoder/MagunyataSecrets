@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
 import ru.edu.masu.model.data.entities.Monster;
+import ru.edu.masu.utils.ImageCaching;
 import ru.edu.masu.viewmodel.MonsterVM;
 
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MonsterInfoFragment#newInstance} factory method to
@@ -26,10 +29,14 @@ import android.widget.TextView;
 public class MonsterInfoFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String MONSTER = "MONSTER";
+    private static final String MONSTER_ID = "MONSTER_ID";
 
-    Monster monster;
+    int monsterId;
     MonsterVM monsterVM;
+    private ImageView monsterPic;
+    private TextView monsterDescTxt;
+    private TextView monsterNameTxt;
+    private Button btn;
 
     @Nullable
     public CardView getCardView() {
@@ -46,13 +53,13 @@ public class MonsterInfoFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param monster Monster.
+     * @param monsterId int.
      * @return A new instance of fragment MonsterInfoFragment.
      */
-    public static MonsterInfoFragment newInstance(Monster monster) {
+    public static MonsterInfoFragment newInstance(int monsterId) {
         MonsterInfoFragment fragment = new MonsterInfoFragment();
         Bundle args = new Bundle();
-        args.putParcelable(MONSTER, monster);
+        args.putInt(MONSTER_ID, monsterId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,7 +68,7 @@ public class MonsterInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            monster = (Monster) getArguments().get(MONSTER);
+            monsterId =  getArguments().getInt(MONSTER_ID);
         }
     }
 
@@ -70,17 +77,26 @@ public class MonsterInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.item_monster_info,container, false);
         monsterVM = new ViewModelProvider(requireActivity()).get(MonsterVM.class);
-        ImageView monsterPic = view.findViewById(R.id.monsterPic);
-        TextView monsterNameTxt = view.findViewById(R.id.monsterName);
-        //TODO: убрать context и getString, когда будет реализована загрузка монстров
+
+        monsterPic = view.findViewById(R.id.monsterPic);
+        monsterNameTxt = view.findViewById(R.id.monsterName);
+        monsterDescTxt = view.findViewById(R.id.descTxt);
+        btn = view.findViewById(R.id.okBtn);
+
+        monsterVM.getMonsters().observe(this, this::onMonstersLoad);
+        cardView = (CardView) view;
+        return view;
+    }
+
+    public void onMonstersLoad(List<Monster> monsters){
         Context context = monsterNameTxt.getContext();
+        Monster monster = monsters.get(monsterId);
         //monsterNameTxt.setText(monster.getMonsterName());
-        monsterNameTxt.setText(context.getString(monster.getMonsterNameId()));
-        TextView monsterDescTxt = view.findViewById(R.id.descTxt);
+        monsterNameTxt.setText(monster.getName());
         //monsterDescTxt.setText(monster.getMonsterDesc());
-        monsterDescTxt.setText(context.getString(monster.getMonsterDescId()));
-        monsterPic.setImageDrawable(getResources().getDrawable(monster.getPicId()));
-        final Button btn = view.findViewById(R.id.okBtn);
+        monsterDescTxt.setText(monster.getDesc());
+        ImageCaching.loadIn(context, monster.getImgPath(), monsterPic);
+
         if(monster.isMet()){
             btn.setEnabled(false);
         }
@@ -93,8 +109,6 @@ public class MonsterInfoFragment extends Fragment {
                 }
             });
         }
-        cardView = (CardView) view;
-        return view;
     }
 
 }

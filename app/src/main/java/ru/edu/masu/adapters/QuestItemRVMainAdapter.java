@@ -53,8 +53,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
     @Override
     public QuestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quest_item, parent, false);
-        QuestViewHolder vh = new QuestViewHolder(view);
-        return vh;
+        return new QuestViewHolder(view);
     }
 
     @Override
