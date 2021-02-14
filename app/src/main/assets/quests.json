@@ -1,61 +1,70 @@
 [
   {
     "name": "Первый квест",
+    "imgPath": "kiski.png",
     "desc": "Помоги Стражу найти потерянный код!",
     "questProviderImg": "strazhnik.png",
     "questHelperImg": "sociofob.png",
-    "questPassId": 0,
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Хммм.. давай поможем Стражу найти записанный код?!"
+    },
+    "questPassName": "simpleTextPass",
     "questStory": [
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "А ты еще кто? Не мешайся мне тут, я пытаюсь найти важную вещь!"
+        "caption":  "А ты еще кто? Не мешайся мне тут, я пытаюсь найти важную вещь!"
       },
 
       {
         "imgPath": "logistic.png",
-        "name": "",
-        "desc":  "Что случилось, Страж? Ты опять что-то потерял?"
+        "caption":  "Что случилось, Страж? Ты опять что-то потерял?"
       },
 
       {
         "imgPath": "safe.png",
-        "name": "",
-        "desc":  "Да! Я потерял бумагу с кодом от сейфа, пытаюсь сосредоточиться и найти ее, поэтому, Логистик, не мешай!"
+        "caption":  "Да! Я потерял бумагу с кодом от сейфа, пытаюсь сосредоточиться и найти ее, поэтому, Логистик, не мешай!"
       }
     ],
     "hints": [
       {
         "name": "Подсказка 1",
+        "imgPath": "sample.jpg",
         "desc": "Если это листочек, то он мог оставить его среди каких-нибудь бумаг... Кстати, если у тебя есть ненужная макулатура, то можешь сложить её в экодерево рядом со входом",
         "delay": 3000
       },
 
       {
         "name": "Подсказка 2",
+        "imgPath": "sample.jpg",
         "desc": "Пам пам",
         "delay": 4000
       },
 
       {
         "name": "Подсказка 2",
+        "imgPath": "sample.jpg",
         "desc": "Hello there",
         "delay": 5000
       }
     ],
 
-    "artifacts": [
+    "equipment": [
       {
         "type": "url",
+        "imgPath": "artifact_masuvk.png",
         "name": "Артифакт с фото",
-        "url": "http://example.com"
+        "url": "http://www.masu.edu.ru/"
       },
 
       {
         "type": "description",
         "name": "Артифакт с описанием",
-        "desc": "Текст текст текст",
-        "url": "http://example.com"
+        "imgPath": "question.png",
+        "descEquipment": {
+          "imgPath": "question.png",
+          "desc": "Текст текст текст"
+        }
       }
     ]
   },
@@ -63,284 +72,322 @@
   {
     "name": "Второй квест",
     "desc": "Тут написано задание квеста",
+    "imgPath": "kiski.png",
     "questProviderImg": "sessia_sketch.png",
     "questHelperImg": "golodny_sketch.png",
-    "questPassId": 1,
+    "questPassName": "simpleTextPass_2",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "sessia_sketch.png",
-        "name": "",
-        "desc":  "Предыстория 1"
+        "caption":  "Предыстория 1"
       },
 
       {
         "imgPath": "sessia_sketch.png",
-        "name": "",
-        "desc":  "Предыстория 2"
+        "caption":  "Предыстория 2"
       }
     ],
     "hints": [
       {
         "name": "Подсказка 3",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 2",
         "delay": 3000
       },
 
       {
         "name": "Подсказка 4",
+        "imgPath": "sample.jpg",
         "desc": "Пам пам",
         "delay": 4000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Тест с QR",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "logistic.png",
     "questHelperImg": "kiski.png",
-    "questPassId": 2,
+    "questPassName": "qrTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 5",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 5",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 4",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
+      
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 5",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 7",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 7",
         "delay": 3000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 6",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 7",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 8",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 9",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   },
 
   {
     "name": "Квест 10",
+    "imgPath": "kiski.png",
     "desc": "Тут написано задание квеста",
     "questProviderImg": "golodny_sketch.png",
     "questHelperImg": "logistic.png",
-    "questPassId": 0,
+    "questPassName": "simpleTextPass",
+    "questTask": {
+      "imgPath": "len_57.jpg",
+      "name": "Пам пам пам"
+    },
     "questStory": [
       {
         "imgPath": "golodny_sketch.png",
-        "name": "",
-        "desc":  "Кушать?"
+        "caption":  "Кушать?"
       },
 
       {
         "imgPath": "strazhnik.png",
-        "name": "",
-        "desc":  "NO!"
+        "caption":  "NO!"
       }
     ],
 
     "hints": [
       {
         "name": "Подсказка 6",
+        "imgPath": "sample.jpg",
         "desc": "подсказка 6",
         "delay": 5000
       }
     ],
 
-    "artifacts": []
+    "equipment": []
   }
 ]

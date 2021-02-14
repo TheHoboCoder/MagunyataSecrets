@@ -1,50 +1,23 @@
 [
   {
-    "type": "codeTextPass",
+    "type": "codeQuestPass",
+    "name": "simpleTextPass",
     "passType": "text",
     "code": "123"
   },
 
   {
-    "type": "codeTextPass",
+    "type": "codeQuestPass",
+    "name": "simpleTextPass_2",
     "passType": "text",
     "code": "321"
   },
 
   {
-    "type": "codeTextPass",
+    "type": "codeQuestPass",
+    "name": "qrTextPass",
     "passType": "qr",
     "code": "QR code quest!"
-  },
-
-  {
-    "type": "codeTextPass",
-    "passType": "qr",
-    "code": "QR code quest!"
-  },
-
-  {
-    "type": "codeTextPass",
-    "passType": "qr",
-    "code": "QR code quest!"
-  },
-
-  {
-    "type": "testPass",
-    "questions": [
-      {
-        "text": "Вопрос 1",
-        "multiselect": false,
-        "options": ["вариант1", "вариант2", "вариант3", "вариант4"],
-        "answer": [2]
-      },
-      {
-        "text": "Вопрос 2",
-        "multiselect": true,
-        "options": ["вариант1", "вариант2", "вариант3", "вариант4"],
-        "answer": [1, 2]
-      }
-    ]
   }
 
 ]
