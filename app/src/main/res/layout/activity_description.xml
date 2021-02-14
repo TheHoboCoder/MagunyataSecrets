@@ -8,13 +8,26 @@
     tools:context=".view.activities.DescriptionActivity">
 
     <ImageView
-        android:id="@+id/descTxt"
-        android:src="@drawable/quest_1_desc"
+        android:id="@+id/descImg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/descTxt"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/descImg"
+        app:layout_constraintEnd_toEndOf="@+id/descImg"
+        app:layout_constraintStart_toEndOf="@id/descImg"
+        app:layout_constraintTop_toTopOf="@+id/descImg" />
 
     <Button
         android:id="@+id/okBtn"

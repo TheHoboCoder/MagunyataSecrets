@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
-import ru.edu.masu.model.data.entities.Monster;
+import ru.edu.masu.model.entities.quest.Monster;
 import ru.edu.masu.utils.ImageCaching;
 import ru.edu.masu.viewmodel.MonsterVM;
 
@@ -95,7 +95,7 @@ public class MonsterInfoFragment extends Fragment {
         monsterNameTxt.setText(monster.getName());
         //monsterDescTxt.setText(monster.getMonsterDesc());
         monsterDescTxt.setText(monster.getDesc());
-        ImageCaching.loadIn(context, monster.getImgPath(), monsterPic);
+        ImageCaching.loadIn(context, monster.getImageInfo().getImgPath(), monsterPic);
 
         if(monster.isMet()){
             btn.setEnabled(false);

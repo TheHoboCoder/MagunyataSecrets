@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.edu.masu.R;
-import ru.edu.masu.model.data.entities.QuestItem;
+import ru.edu.masu.model.entities.quest.QuestItem;
+import ru.edu.masu.utils.ImageCaching;
 
 public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMainAdapter.QuestViewHolder> {
 
@@ -27,7 +27,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
         this.context   = context;
     }
 
-    public class QuestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class QuestViewHolder extends RecyclerView.ViewHolder{
 
         public ImageView image;
         public TextView name;
@@ -36,23 +36,17 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
 
         public QuestViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             image  = itemView.findViewById(R.id.image);
             name   = itemView.findViewById(R.id.name);
             status = itemView.findViewById(R.id.status);
             quest_item_layout = itemView.findViewById(R.id.quest_item_layout);
-        }
-
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
         }
     }
 
     @NonNull
     @Override
     public QuestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.quest_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_quest, parent, false);
         return new QuestViewHolder(view);
     }
 
@@ -80,7 +74,7 @@ public class QuestItemRVMainAdapter extends RecyclerView.Adapter<QuestItemRVMain
                 throw new IllegalStateException("Unexpected value: " + questItem.getStatus());
         }
         holder.quest_item_layout.setBackgroundResource(background);
-        holder.image.setImageResource(questItem.getImage());
+        ImageCaching.loadIn(context, questItem.getImageInfo().getImgPath(), holder.image);
         holder.name.setText(questItem.getName());
         holder.status.setText(status);
     }

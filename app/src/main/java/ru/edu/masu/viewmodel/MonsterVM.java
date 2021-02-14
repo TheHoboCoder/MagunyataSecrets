@@ -1,10 +1,11 @@
 package ru.edu.masu.viewmodel;
 
+import java.io.IOException;
 import java.util.List;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import ru.edu.masu.model.data.entities.Monster;
+import ru.edu.masu.model.entities.quest.Monster;
 import ru.edu.masu.model.data.repository.MonsterRepository;
 
 public class MonsterVM extends ViewModel {
@@ -27,7 +28,13 @@ public class MonsterVM extends ViewModel {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    List<Monster> value = monsterRepository.getAll();
+                    List<Monster> value = null;
+                    //todo:
+                    try {
+                        value = monsterRepository.getAll();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     monsters.postValue(value);
                 }
             }).start();

@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="300dp"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
     android:layout_height="200dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ImageView
             android:id="@+id/imageView"
-            android:padding="8dp"
-            android:src="@drawable/podskazka_logistik_kv1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4"
             android:contentDescription="тут изображение"
-            android:scaleType="centerInside" />
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/kiski"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

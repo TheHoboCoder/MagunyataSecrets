@@ -18,6 +18,7 @@
             android:id="@+id/inventoryButton"
             android:layout_width="@dimen/main_toolbar_h"
             android:layout_height="match_parent"
+            android:onClick="onInventoryClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,6 +28,7 @@
             android:src="@drawable/kiski"
             android:scaleType="centerInside"
             android:layout_width="@dimen/main_toolbar_h"
+            android:onClick="onHintBtnClick"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +37,7 @@
             android:id="@+id/storyBtn"
             android:layout_width="@dimen/main_toolbar_h"
             android:layout_height="match_parent"
+            android:onClick="onStoryBtnClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/hintBtn"
             app:layout_constraintTop_toTopOf="parent" />
@@ -127,6 +130,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="8dp"
+                    android:onClick="onQuestPassBtnClick"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.3"

@@ -1,20 +1,23 @@
 package ru.edu.masu.viewmodel;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import ru.edu.masu.model.IQuestPass;
-import ru.edu.masu.model.IQuestPassHolder;
-import ru.edu.masu.model.data.entities.Hint;
-import ru.edu.masu.model.data.entities.QuestItem;
+import ru.edu.masu.model.entities.questPass.IQuestPass;
+import ru.edu.masu.model.entities.quest.Hint;
+import ru.edu.masu.model.entities.quest.QuestItem;
 import ru.edu.masu.model.data.repository.IRepository;
+import ru.edu.masu.model.data.repository.QuestPassRepository;
+import ru.edu.masu.utils.PreferencesWrapper;
 
-public class MainVM extends ViewModel implements IQuestPassHolder {
+public class MainVM extends ViewModel {
 
-    private MutableLiveData<QuestItem> currentQuest;
+    private MediatorLiveData<QuestItem> currentQuest;
     public LiveData<QuestItem> getCurrentQuest(){
         return currentQuest;
     }
@@ -24,78 +27,121 @@ public class MainVM extends ViewModel implements IQuestPassHolder {
         return progress;
     }
 
-    private MutableLiveData<Hint> currentHint;
+    private MediatorLiveData<Hint> currentHint;
     public LiveData<Hint> getCurrentHint(){
         return currentHint;
     }
 
+
+    private MutableLiveData<List<QuestItem>> questItems;
+    private MutableLiveData<IQuestPass> questPassLiveData;
+    public LiveData<IQuestPass> getQuestPassLiveData(){
+        return questPassLiveData;
+    }
+
+    private void uploadQuestPass(QuestItem currentQuest){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                IQuestPass questPass = null;
+                try {
+                    questPass = questPassRepository.getByName(currentQuest.getQuestPassName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                questPassLiveData.postValue(questPass);
+            }
+        }).start();
+    }
+
+    private PreferencesWrapper preferences;
+    private QuestPassRepository questPassRepository;
     private IRepository<QuestItem> questRepository;
-    private List<QuestItem> questItems;
-    public List<QuestItem> getQuestItems(){
-        if(questItems == null){
-            questItems = questRepository.getAll();
+
+    public MutableLiveData<List<QuestItem>> getQuestItems(){
+        if(questItems.getValue() == null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<QuestItem> value = new ArrayList<>();
+                    try {
+                        value = questRepository.getAll();
+                    } catch (IOException e) {
+                        //todo:
+                        e.printStackTrace();
+                    }
+                    questItems.postValue(value);
+                }
+            }).start();
         }
         return questItems;
     }
 
-    private int currentHintIndex;
-
-    public MainVM(IRepository<QuestItem> questRepository){
+    public MainVM(IRepository<QuestItem> questRepository,
+                  QuestPassRepository questPassRepository,
+                  PreferencesWrapper preferencesWrapper){
         this.questRepository = questRepository;
+        this.preferences = preferencesWrapper;
+        this.questPassRepository = questPassRepository;
+        questPassLiveData = new MutableLiveData<>();
+        questItems = new MutableLiveData<>();
+        currentQuest = new MediatorLiveData<>();
+        // после загрузки всех квестов должен быть установлен текущий квест
+        currentQuest.addSource(questItems, items -> {
+            QuestItem value = items.get(preferences.getCurrentQuestIndex());
+            startQuest(value);
+        });
+
+        currentHint = new MediatorLiveData<>();
+        currentHint.addSource(currentQuest, questItem -> {
+                    if(questItem.getStatus() == QuestItem.Status.FINISHED)
+                        return;
+                    currentHint.setValue(questItem.getQuestHints().get(preferences.getCurrentHintIndex()));
+                    uploadQuestPass(questItem);
+         });
         progress = new MutableLiveData<>();
-        progress.setValue(0);
-        currentQuest = new MutableLiveData<>();
-        setCurrentQuest(progress.getValue());
-        currentHint = new MutableLiveData<>();
-        setCurrentHint(0);
+        // вызываем, чтобы начать загрузку квестов
+        getQuestItems();
+    }
+
+    private void startQuest(QuestItem questItem){
+        questItem.start();
+        preferences.setCurrentHintIndex(0);
+        progress.setValue(preferences.getCurrentQuestIndex());
+        currentQuest.setValue(questItem);
     }
 
     public void toNextQuest(){
-        int progressValue = progress.getValue();
-        QuestItem old = getCurrentQuest().getValue();
-        progressValue++;
-        progress.setValue(progressValue);
-        setCurrentQuest(progressValue);
-        currentHintIndex = 0;
-        setCurrentHint(currentHintIndex);
+        if(getQuestItems().getValue() != null){
+            int currentIndex = preferences.getCurrentQuestIndex() + 1;
+            preferences.setCurrentQuestIndex(currentIndex);
+            questPassLiveData.setValue(null);
+            QuestItem nextQuest = getQuestItems().getValue().get(currentIndex);
+            startQuest(nextQuest);
+        }
     }
 
     public void toNextHint(){
-        currentHintIndex++;
-        setCurrentHint(currentHintIndex);
-    }
-
-    private void setCurrentQuest(int pos){
-        if(pos > getQuestItems().size()-1){
-            return;
-        }
-        QuestItem current = getQuestItems().get(pos);
-        current.start();
-        currentQuest.setValue(current);
-    }
-
-    private void setCurrentHint(int pos){
+        int currentHintIndex = preferences.getCurrentHintIndex() + 1;
         QuestItem current = getCurrentQuest().getValue();
-        if(current==null || pos > current.getQuestHints().size()-1){
+        if(current != null && currentHintIndex < current.getQuestHints().size()){
+            preferences.setCurrentHintIndex(currentHintIndex);
+            Hint hint = current.getQuestHints().get(currentHintIndex);
+            currentHint.setValue(hint);
+        }
+
+    }
+
+    public void finishQuest() {
+        IQuestPass currentQuestPass = null;
+        if(currentQuest.getValue() != null && questPassLiveData.getValue() != null){
+            currentQuestPass = questPassLiveData.getValue();
+        }
+        else{
             return;
         }
-        Hint hint = current.getQuestHints().get(pos);
-        currentHint.setValue(hint);
-    }
-
-    @Override
-    public IQuestPass provideQuestPass() {
-        return Objects.requireNonNull(currentQuest.getValue()).getQuestPass();
-    }
-
-    @Override
-    public void check(IQuestPass questPass) {
-        IQuestPass currentQuestPass = provideQuestPass();
-        currentQuestPass.from(questPass);
-        if(currentQuestPass.isPassed()){
-            QuestItem current = Objects.requireNonNull(currentQuest.getValue());
-            current.finish();
-            currentQuest.setValue(current);
-        }
+        QuestItem current = currentQuest.getValue();
+        current.finish();
+        currentQuest.setValue(current);
     }
 }

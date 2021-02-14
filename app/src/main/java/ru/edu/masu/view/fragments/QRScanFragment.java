@@ -2,7 +2,6 @@ package ru.edu.masu.view.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -22,7 +20,6 @@ import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,25 +40,40 @@ import java.util.concurrent.Executors;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
-import ru.edu.masu.model.CodeQuestPass;
-import ru.edu.masu.model.IQuestPass;
-import ru.edu.masu.utils.ScanActivity;
+import ru.edu.masu.model.entities.questPass.CodeQuestPass;
 import ru.edu.masu.viewmodel.QuestPassVM;
-import ru.edu.masu.viewmodel.QuestPassVMFactory;
 
 public class QRScanFragment extends Fragment {
 
     private final static int PERMISSION_REQUEST_CODE = 42;
     private static final String QUEST_PASS = "QUEST_PASS";
     private QuestPassVM questPassVM;
+    private String questName;
+    private static final String QUEST_NAME = "quest_name";
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PreviewView cameraView;
     private Preview imagePreview;
     private BarcodeScanner detector;
 
+
+    public static QRScanFragment getInstance(String questName){
+        QRScanFragment qrScanFragment = new QRScanFragment();
+        Bundle args = new Bundle();
+        args.putString(QUEST_NAME, questName);
+        qrScanFragment.setArguments(args);
+        return qrScanFragment;
+    }
     public QRScanFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            questName = getArguments().getString(QUEST_NAME);
+        }
     }
 
     @Override
@@ -174,13 +186,16 @@ public class QRScanFragment extends Fragment {
     }
 
     private void checkPassStatus(String code){
-        CodeQuestPass codeQuestPass = (CodeQuestPass) questPassVM.provideQuestPass();
-        codeQuestPass.enterCode(code);
-        if(!codeQuestPass.isPassed()){
-            Toast toast = Toast.makeText(getContext(), "Неверный код", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        questPassVM.check(codeQuestPass);
+        questPassVM.getCurrentQuest(questName).observe(this, questPass -> {
+            questPassVM.getCurrentQuest(questName).removeObservers(this);
+            CodeQuestPass codeQuestPass = (CodeQuestPass) questPass;
+            codeQuestPass.enterCode(code);
+            if(!codeQuestPass.isPassed()){
+                Toast toast = Toast.makeText(getContext(), "Неверный код", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            questPassVM.check(codeQuestPass);
+        });
     }
 
 

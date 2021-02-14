@@ -5,44 +5,59 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import ru.edu.masu.R;
-import ru.edu.masu.model.IQuestPass;
-import ru.edu.masu.utils.QuestPassFragmentProvider;
+import ru.edu.masu.model.entities.questPass.IQuestPass;
+import ru.edu.masu.model.data.repository.QuestPassRepository;
 import ru.edu.masu.viewmodel.QuestPassVM;
 import ru.edu.masu.viewmodel.QuestPassVMFactory;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-public class QuestPassActivity extends AppCompatActivity {
+public class QuestPassActivity extends AppCompatActivity implements IQuestPassPerformer{
 
     public static final int REQUEST_CODE = 10;
     public static final int QUEST_PASSED = 5;
-    public static final String IQUEST_PASS_PARCEABLE = "IQuestPass";
+    public static final String QUEST_NAME = "quest_name";
     private QuestPassVM questPassVM;
+    private QuestPassProvider questPassProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_quest_pass);
-        IQuestPass questPass = getIntent().getParcelableExtra(IQUEST_PASS_PARCEABLE);
-        questPassVM = new ViewModelProvider(this, new QuestPassVMFactory(questPass))
+        String questPassName = getIntent().getStringExtra(QUEST_NAME);
+        questPassProvider = new QuestPassProvider(this);
+        questPassVM = new ViewModelProvider(this,
+                new QuestPassVMFactory(new QuestPassRepository(getAssets())))
                 .get(QuestPassVM.class);
+        questPassVM.getCurrentQuest(questPassName).observe(this, questPass -> {
+            questPass.createVerifier(questPassProvider);
+        });
         questPassVM.getPassStatus().observe(this, status -> {
             if(status){
-                onQuestPassed();
+                Intent finishIntent =  new Intent();
+                setResult(QUEST_PASSED, finishIntent);
+                finish();
             }
         });
-        Fragment questPassFragment = QuestPassFragmentProvider.get(questPass);
+
+    }
+
+    @Override
+    public boolean canDisplayFullScreen() {
+        return true;
+    }
+
+    @Override
+    public void showQuestPassFragment(Fragment questPassFragment) {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction()
                 .add(R.id.container, questPassFragment,"questPassFragment")
                 .commit();
     }
 
-    public void onQuestPassed(){
-        Intent finishIntent =  new Intent();
-        finishIntent.putExtra(IQUEST_PASS_PARCEABLE, questPassVM.provideQuestPass());
-        setResult(QUEST_PASSED, finishIntent);
-        finish();
+    @Override
+    public void navigateToAnother(IQuestPass questPass) {
+
     }
 }

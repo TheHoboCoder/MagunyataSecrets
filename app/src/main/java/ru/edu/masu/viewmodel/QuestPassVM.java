@@ -1,30 +1,45 @@
 package ru.edu.masu.viewmodel;
 
+import java.io.IOException;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import ru.edu.masu.model.IQuestPass;
-import ru.edu.masu.model.IQuestPassHolder;
+import ru.edu.masu.model.entities.questPass.IQuestPass;
+import ru.edu.masu.model.data.repository.QuestPassRepository;
 
-public class QuestPassVM extends ViewModel implements IQuestPassHolder {
+public class QuestPassVM extends ViewModel  {
 
-    private IQuestPass questPass;
     private MutableLiveData<Boolean> isPassed;
     public LiveData<Boolean> getPassStatus(){
         return isPassed;
     }
 
-    public QuestPassVM(IQuestPass questPass){
-        this.questPass = questPass;
+    private MutableLiveData<IQuestPass> currentQuestPass;
+    public LiveData<IQuestPass> getCurrentQuest(String name){
+        if(currentQuestPass.getValue() == null){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        IQuestPass questPass = questPassRepository.getByName(name);
+                        currentQuestPass.postValue(questPass);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+        return currentQuestPass;
+    }
+    private QuestPassRepository questPassRepository;
+
+    public QuestPassVM(QuestPassRepository questPassRepository){
+        this.questPassRepository = questPassRepository;
+        currentQuestPass = new MutableLiveData<>();
         isPassed = new MutableLiveData<>();
     }
 
-    @Override
-    public IQuestPass provideQuestPass() {
-        return questPass;
-    }
-
-    @Override
     public void check(IQuestPass questPass) {
         questPass.from(questPass);
         isPassed.setValue(questPass.isPassed());

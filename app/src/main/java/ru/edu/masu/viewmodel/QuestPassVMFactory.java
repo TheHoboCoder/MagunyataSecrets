@@ -3,13 +3,14 @@ package ru.edu.masu.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import ru.edu.masu.model.IQuestPass;
+import ru.edu.masu.model.data.repository.QuestPassRepository;
 
 public class QuestPassVMFactory implements ViewModelProvider.Factory{
 
-    private IQuestPass questPass;
-    public QuestPassVMFactory(IQuestPass questPass){
-        this.questPass = questPass;
+    private QuestPassRepository questPassRepository;
+
+    public QuestPassVMFactory(QuestPassRepository questPassRepository){
+        this.questPassRepository = questPassRepository;
     }
 
     @NonNull
@@ -17,7 +18,7 @@ public class QuestPassVMFactory implements ViewModelProvider.Factory{
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if(modelClass.isAssignableFrom(QuestPassVM.class)){
-            return (T) new QuestPassVM(questPass);
+            return (T) new QuestPassVM(questPassRepository);
         }
         throw new IllegalArgumentException("Wrong VM: "+modelClass.getName());
     }
