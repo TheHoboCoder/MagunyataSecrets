@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ru.edu.masu">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.StoryActivity"></activity>
+        <activity android:name=".view.activities.EquipmentActivity"></activity>
+        <activity android:name=".view.activities.StoryActivity" />
         <activity android:name=".view.activities.QuestPassActivity" />
         <activity android:name=".view.activities.DescriptionActivity" />
         <activity
@@ -41,5 +38,9 @@ Meet Activity won't be added to back stack,
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
 </manifest>

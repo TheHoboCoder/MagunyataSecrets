@@ -24,7 +24,7 @@ public class QuestPassActivity extends AppCompatActivity implements IQuestPassPe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_quest_pass);
+        setContentView(R.layout.activity_pass);
         String questPassName = getIntent().getStringExtra(QUEST_NAME);
         questPassProvider = new QuestPassProvider(this);
         questPassVM = new ViewModelProvider(this,

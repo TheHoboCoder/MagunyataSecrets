@@ -24,7 +24,7 @@ public class CodeQuestPassFragment extends BasicDialogFragment {
 
     public static CodeQuestPassFragment newInstance() {
         CodeQuestPassFragment fragment = new CodeQuestPassFragment();
-        Bundle args = packArgs(R.layout.pass_quest_fragment,R.string.pass_quest);
+        Bundle args = packArgs(R.layout.fragment_quest_pass,R.string.pass_quest);
         fragment.setArguments(args);
         return fragment;
     }
