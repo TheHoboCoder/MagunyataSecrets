@@ -16,15 +16,15 @@ import ru.edu.masu.model.entities.quest.StoryItem;
 public class QuestItemAdapter extends DescriptionItemAdapter<QuestItem> {
 
 
-    private NamedItemAdapter<NamedItem> namedItemAdapter;
-    private StoryItemAdapter storyItemAdapter;
-    private IEquipmentAdapter equipmentAdapter;
-    private HintTypeAdapter hintTypeAdapter;
+    private ITypeAdapter<NamedItem> namedItemAdapter;
+    private ITypeAdapter<StoryItem> storyItemAdapter;
+    private ITypeAdapter<IEquipment> equipmentAdapter;
+    private ITypeAdapter<Hint> hintTypeAdapter;
 
-    public QuestItemAdapter(NamedItemAdapter<NamedItem> namedItemAdapter,
-                            StoryItemAdapter storyItemAdapter,
-                            IEquipmentAdapter equipmentAdapter,
-                            HintTypeAdapter hintTypeAdapter) {
+    public QuestItemAdapter(ITypeAdapter<NamedItem> namedItemAdapter,
+                            ITypeAdapter<StoryItem> storyItemAdapter,
+                            ITypeAdapter<IEquipment> equipmentAdapter,
+                            ITypeAdapter<Hint> hintTypeAdapter) {
         this.namedItemAdapter = namedItemAdapter;
         this.storyItemAdapter = storyItemAdapter;
         this.equipmentAdapter = equipmentAdapter;

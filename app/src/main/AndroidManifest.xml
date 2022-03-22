@@ -4,13 +4,14 @@
     package="ru.edu.masu">
 
     <application
+        android:name="ru.edu.masu.di.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activities.EquipmentActivity"></activity>
+        <activity android:name=".view.activities.EquipmentActivity"/>
         <activity android:name=".view.activities.StoryActivity" />
         <activity android:name=".view.activities.QuestPassActivity" />
         <activity android:name=".view.activities.DescriptionActivity" />

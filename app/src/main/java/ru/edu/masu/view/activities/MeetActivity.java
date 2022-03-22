@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 import ru.edu.masu.R;
 import ru.edu.masu.adapters.MonsterInfoPagerAdapter;
+import ru.edu.masu.di.App;
 import ru.edu.masu.model.entities.quest.Monster;
 import ru.edu.masu.model.data.repository.MonsterRepository;
 import ru.edu.masu.utils.ShadowTransformer;
 import ru.edu.masu.viewmodel.BasicVMFactory;
 import ru.edu.masu.viewmodel.MonsterVM;
+import ru.edu.masu.viewmodel.ViewModelProviderFactory;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,18 +20,21 @@ import android.widget.Button;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MeetActivity extends AppCompatActivity{
 
     private MonsterVM monsterVM;
 
+    @Inject
+    ViewModelProviderFactory factory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //((App)getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meet);
-        // TODO: dagger
-        monsterVM = new ViewModelProvider(this,
-                new BasicVMFactory(new MonsterRepository(getAssets())))
-                .get(MonsterVM.class);
+        monsterVM = new ViewModelProvider(this, factory).get(MonsterVM.class);
 
         Button btn = findViewById(R.id.nextBtn);
         monsterVM.getRead().observe(this, btn::setEnabled);

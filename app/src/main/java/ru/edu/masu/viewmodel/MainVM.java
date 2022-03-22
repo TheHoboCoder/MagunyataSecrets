@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -77,6 +79,7 @@ public class MainVM extends ViewModel {
         return questItems;
     }
 
+    @Inject
     public MainVM(IRepository<QuestItem> questRepository,
                   QuestPassRepository questPassRepository,
                   PreferencesWrapper preferencesWrapper){

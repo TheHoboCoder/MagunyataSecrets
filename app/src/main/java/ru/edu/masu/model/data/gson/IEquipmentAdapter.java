@@ -15,9 +15,9 @@ import ru.edu.masu.model.entities.equipment.UrlEquipment;
 
 public class IEquipmentAdapter extends MultiTypeAdapter<IEquipment> {
 
-    private DescriptionItemAdapter<DescriptionItem> descriptionItemAdapter;
+    private ITypeAdapter<DescriptionItem> descriptionItemAdapter;
 
-    public IEquipmentAdapter(DescriptionItemAdapter<DescriptionItem> descriptionItemAdapter) {
+    public IEquipmentAdapter(ITypeAdapter<DescriptionItem> descriptionItemAdapter) {
         this.descriptionItemAdapter = descriptionItemAdapter;
     }
 

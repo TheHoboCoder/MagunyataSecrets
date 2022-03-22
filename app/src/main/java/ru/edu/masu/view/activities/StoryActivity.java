@@ -33,12 +33,12 @@ public class StoryActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         viewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         AssetManager assetManager = getAssets();
-        mainVM = new ViewModelProvider(this,
-                new MainVMFactory(new QuestRepository(assetManager),
-                        new QuestPassRepository(assetManager),
-                        new PreferencesWrapper(
-                                getSharedPreferences(PreferencesWrapper.PREFERENCES_FILE, MODE_PRIVATE))))
-                .get(MainVM.class);
+//        mainVM = new ViewModelProvider(this,
+//                new MainVMFactory(new QuestRepository(assetManager),
+//                        new QuestPassRepository(assetManager),
+//                        new PreferencesWrapper(
+//                                getSharedPreferences(PreferencesWrapper.PREFERENCES_FILE, MODE_PRIVATE))))
+//                .get(MainVM.class);
         mainVM.getCurrentQuest().observe(this, this::onCurrentQuestLoaded);
     }
 

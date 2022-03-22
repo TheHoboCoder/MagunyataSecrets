@@ -2,6 +2,9 @@ package ru.edu.masu.viewmodel;
 
 import java.io.IOException;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -42,6 +45,7 @@ public class MonsterVM extends ViewModel {
         return monsters;
     }
 
+    @Inject
     public MonsterVM(MonsterRepository monsterRepository){
         this.monsterRepository = monsterRepository;
         isAllRead = new MutableLiveData<>();

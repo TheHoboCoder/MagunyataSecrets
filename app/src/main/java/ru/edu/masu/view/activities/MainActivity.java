@@ -24,8 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.edu.masu.R;
 import ru.edu.masu.adapters.QuestItemRVMainAdapter;
+import ru.edu.masu.di.App;
 import ru.edu.masu.model.entities.quest.Hint;
 import ru.edu.masu.model.entities.basic.NamedItem;
 import ru.edu.masu.model.entities.quest.QuestItem;
@@ -37,10 +40,10 @@ import ru.edu.masu.utils.PreferencesWrapper;
 import ru.edu.masu.view.dialogs.HintFragment;
 import ru.edu.masu.viewmodel.MainVM;
 import ru.edu.masu.viewmodel.MainVMFactory;
+import ru.edu.masu.viewmodel.ViewModelProviderFactory;
 
 public class MainActivity extends AppCompatActivity implements IQuestPassPerformer {
 
-    private MainVM mainVM;
     private TextView questNameTxt, questDescTxt, progressTxt;
     private ProgressBar progressBar;
     private ImageView questImage;
@@ -51,24 +54,24 @@ public class MainActivity extends AppCompatActivity implements IQuestPassPerform
     private HintFragment hintFragment;
     private DialogFragment questPassDialog;
     private Handler handler;
-    private PreferencesWrapper preferencesWrapper;
     private QuestPassProvider questPassProvider;
 
     private Hint lastHint;
     private QuestItem currentQuest;
 
+    @Inject
+    ViewModelProviderFactory vmFactory;
+
+    MainVM mainVM;
+    @Inject
+    PreferencesWrapper preferencesWrapper;
+
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
+       //((App)getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        preferencesWrapper = new PreferencesWrapper(
-                getSharedPreferences(PreferencesWrapper.PREFERENCES_FILE, MODE_PRIVATE));
-        questPassProvider = new QuestPassProvider(this);
-        AssetManager assetManager = getAssets();
-        mainVM = new ViewModelProvider(this,
-                new MainVMFactory(new QuestRepository(assetManager),
-                        new QuestPassRepository(assetManager), preferencesWrapper))
-                .get(MainVM.class);
+        mainVM  = new ViewModelProvider(this, vmFactory).get(MainVM.class);
         handler = new Handler();
         initUI();
         mainVM.getQuestItems().observe(this, this::onQuestItemsLoaded);

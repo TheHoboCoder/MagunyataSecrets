@@ -2,6 +2,8 @@ package ru.edu.masu.viewmodel;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -34,6 +36,7 @@ public class QuestPassVM extends ViewModel  {
     }
     private QuestPassRepository questPassRepository;
 
+    @Inject
     public QuestPassVM(QuestPassRepository questPassRepository){
         this.questPassRepository = questPassRepository;
         currentQuestPass = new MutableLiveData<>();

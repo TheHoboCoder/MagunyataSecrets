@@ -9,30 +9,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import ru.edu.masu.model.data.gson.ITypeAdapter;
 import ru.edu.masu.model.entities.quest.Monster;
 import ru.edu.masu.model.data.gson.MonsterItemAdapter;
 import ru.edu.masu.model.data.gson.StandartTypeAdapter;
 
 public class MonsterRepository extends BasicRepository<Monster>{
 
-    private final String MONSTER_FILE = "monsters.json";
-
-    public MonsterRepository(AssetManager assetManager){
-        super(assetManager);
+    @Inject
+    public MonsterRepository(AssetManager assetManager, ITypeAdapter<Monster> typeAdapter){
+        super(Monster.class, assetManager, typeAdapter);
     }
 
     @Override
-    public List<Monster> getAll() throws IOException {
-        Gson gson = new GsonBuilder().
-                registerTypeAdapter(Monster.class,
-                        new StandartTypeAdapter<Monster>(new MonsterItemAdapter()))
-                .create();
-        List<Monster> monsters = new ArrayList<>();
-        InputStream inputStream = assetManager.open(MONSTER_FILE);
-        monsters = gson.fromJson(inputStreamToString(inputStream),
-                                    new TypeToken<List<Monster>>(){}.getType());
-        inputStream.close();
-        return monsters;
+    protected String getFile() {
+        return "monsters.json";
     }
 
     @Override

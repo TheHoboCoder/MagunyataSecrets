@@ -2,6 +2,7 @@ package ru.edu.masu.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import ru.edu.masu.R;
+import ru.edu.masu.di.App;
 import ru.edu.masu.utils.PreferencesWrapper;
 
 import android.content.Intent;
@@ -10,17 +11,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import javax.inject.Inject;
+
 // Начальный экран приложения
 public class StartActivity extends AppCompatActivity {
 
+    @Inject
     PreferencesWrapper preferencesWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //((App)getApplication()).getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        preferencesWrapper = new PreferencesWrapper(
-                getSharedPreferences(PreferencesWrapper.PREFERENCES_FILE, MODE_PRIVATE));
         if(preferencesWrapper.isGameRunned()){
             Intent intent = new Intent(StartActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ru.edu.masu.model.data.gson.ITypeAdapter;
 import ru.edu.masu.model.entities.basic.DescriptionItem;
 import ru.edu.masu.model.entities.basic.NamedItem;
 import ru.edu.masu.model.entities.quest.QuestItem;
@@ -24,36 +27,14 @@ import ru.edu.masu.model.data.gson.StoryItemAdapter;
 
 public class QuestRepository extends BasicRepository<QuestItem> {
 
-    private final String QUESTS_FILE = "quests.json";
-
-    public QuestRepository(AssetManager assetManager) {
-        super(assetManager);
+    @Inject
+    public QuestRepository(AssetManager assetManager, ITypeAdapter<QuestItem> typeAdapter) {
+        super(QuestItem.class, assetManager, typeAdapter);
     }
 
     @Override
-    public List<QuestItem> getAll() throws IOException {
-        //todo
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(QuestItem.class, new StandartTypeAdapter<QuestItem>(
-                        new QuestItemAdapter(new NamedItemAdapter<NamedItem>() {
-                            @Override
-                            public NamedItem create() {
-                                return new NamedItem();
-                            }
-                        }, new StoryItemAdapter(), new IEquipmentAdapter(new DescriptionItemAdapter<DescriptionItem>() {
-                            @Override
-                            public DescriptionItem create() {
-                                return new DescriptionItem();
-                            }
-                        }), new HintTypeAdapter())))
-                .create();
-
-        List<QuestItem> quests = new ArrayList<>();
-        InputStream inputStream = assetManager.open(QUESTS_FILE);
-        quests = gson.fromJson(inputStreamToString(inputStream),
-                new TypeToken<List<QuestItem>>(){}.getType());
-        inputStream.close();
-        return quests;
+    protected String getFile() {
+        return "quests.json";
     }
 
     @Override

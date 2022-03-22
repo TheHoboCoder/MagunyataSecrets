@@ -9,9 +9,12 @@ import ru.edu.masu.model.entities.questPass.IQuestPass;
 import ru.edu.masu.model.data.repository.QuestPassRepository;
 import ru.edu.masu.viewmodel.QuestPassVM;
 import ru.edu.masu.viewmodel.QuestPassVMFactory;
+import ru.edu.masu.viewmodel.ViewModelProviderFactory;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import javax.inject.Inject;
 
 public class QuestPassActivity extends AppCompatActivity implements IQuestPassPerformer{
 
@@ -21,15 +24,16 @@ public class QuestPassActivity extends AppCompatActivity implements IQuestPassPe
     private QuestPassVM questPassVM;
     private QuestPassProvider questPassProvider;
 
+    @Inject
+    ViewModelProviderFactory vmFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass);
         String questPassName = getIntent().getStringExtra(QUEST_NAME);
         questPassProvider = new QuestPassProvider(this);
-        questPassVM = new ViewModelProvider(this,
-                new QuestPassVMFactory(new QuestPassRepository(getAssets())))
-                .get(QuestPassVM.class);
+        questPassVM = new ViewModelProvider(this, vmFactory).get(QuestPassVM.class);
         questPassVM.getCurrentQuest(questPassName).observe(this, questPass -> {
             questPass.createVerifier(questPassProvider);
         });

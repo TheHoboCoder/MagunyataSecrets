@@ -12,47 +12,42 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import ru.edu.masu.model.data.gson.ITypeAdapter;
 import ru.edu.masu.model.entities.questPass.IQuestPass;
 import ru.edu.masu.model.data.gson.IQuestPassAdapter;
 import ru.edu.masu.model.data.gson.StandartTypeAdapter;
 
 public class QuestPassRepository extends BasicRepository<IQuestPass> {
 
-    private final String PATH = "quest_pass_methods.json";
-
-    HashMap<String, IQuestPass> questPassHashMap;
-    List<IQuestPass> questPasses;
-
-    public QuestPassRepository(AssetManager assetManager) {
-        super(assetManager);
+    @Override
+    protected String getFile() {
+        return "quest_pass_methods.json";
     }
 
-    public void upload() throws IOException {
-        if(questPasses == null){
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(IQuestPass.class,
-                            new StandartTypeAdapter<IQuestPass>(new IQuestPassAdapter()))
-                    .create();
-            questPasses = new ArrayList<>();
-            InputStream inputStream = assetManager.open(PATH);
-            questPasses = gson.fromJson(inputStreamToString(inputStream),
-                    new TypeToken<List<IQuestPass>>(){}.getType());
-            inputStream.close();
-            questPassHashMap = new HashMap<>(questPasses.size());
-            for(IQuestPass questPass:questPasses){
-                questPassHashMap.put(questPass.getName(), questPass);
-            }
-        }
+    HashMap<String, IQuestPass> questPassHashMap;
+
+    @Inject
+    public QuestPassRepository(AssetManager assetManager, ITypeAdapter<IQuestPass> typeAdapter) {
+        super(IQuestPass.class, assetManager, typeAdapter);
     }
 
     @Override
-    public List<IQuestPass> getAll() throws IOException {
-        upload();
-        return questPasses;
+    protected List<IQuestPass> uploadGson() throws IOException{
+         super.uploadGson();
+         if(questPassHashMap == null){
+             questPassHashMap = new HashMap<>(items.size());
+             for(IQuestPass questPass:items){
+                 questPassHashMap.put(questPass.getName(), questPass);
+             }
+         }
+         return items;
     }
 
+
     public IQuestPass getByName(String name) throws IOException{
-        upload();
+        uploadGson();
         return questPassHashMap.get(name);
     }
 
